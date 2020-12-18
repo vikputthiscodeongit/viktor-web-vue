@@ -1,6 +1,8 @@
 # OS files
-.DS_Store
 *~
+.DS_Store
+ehthumbs.db
+Thumbs.db
 
 # local env files
 .env.local
