@@ -3,12 +3,12 @@
         <div class="container">
             <div class="title">
                 <h1>
-                    <?php echo $title; ?>
+                    <!-- Title -->
                 </h1>
             </div>
 
             <div class="text">
-                <?php the_content(); ?>
+                <!-- Text -->
             </div>
 
             <form>
