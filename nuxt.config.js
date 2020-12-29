@@ -33,6 +33,9 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
+    '~/assets/scss/bootstrap/bootstrap.scss',
+    '~/assets/scss/mixins/mixins.scss',
+    '~/assets/scss/_variables.scss',
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -62,6 +65,10 @@ export default {
     baseURL: 'http://viktor-cms.local/api/',
   },
 
+  bootstrapVue: {
+    bootstrapCss: false,
+    bootstrapVueCss: false,
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
