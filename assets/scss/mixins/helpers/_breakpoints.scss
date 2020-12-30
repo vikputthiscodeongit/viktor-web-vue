@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+
 // Re-define Bootstrap's breakpoint-max function to make the respond-below & respond-between mixins more intuitive.
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
     $max: map-get($breakpoints, $name);

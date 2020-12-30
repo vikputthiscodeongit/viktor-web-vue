@@ -32,11 +32,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [
-    '~/assets/scss/bootstrap/bootstrap.scss',
-    '~/assets/scss/mixins/mixins.scss',
-    '~/assets/scss/_variables.scss',
-  ],
+  css: ['~/assets/scss/bootstrap/bootstrap.scss'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [],
@@ -48,7 +44,16 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources',
   ],
+
+  styleResources: {
+    scss: [
+      '~/assets/scss/bootstrap/_variables.scss', // I want the Bootstrap variables to be available even after the Bootstrap components & utilities have been built.
+      '~/assets/scss/mixins/mixins.scss',
+      '~/assets/scss/_variables.scss',
+    ],
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
