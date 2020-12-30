@@ -1,6 +1,8 @@
 <template>
   <header id="site-header" class="site-header">
     <div class="site-menu">
+      {{ navItems }}
+
       <nav class="site-navigation">
         <ul class="site-navigation__buttons" aria-label="Pagina's">
           <li v-for="navItem in navItems" :key="navItem.id">
@@ -10,7 +12,7 @@
               </span>
 
               <span class="site-navigation__title">
-                <span v-text="navItem.page_name"></span>
+                <span v-text="navItem.itemLabel"></span>
               </span>
             </a>
           </li>
@@ -24,24 +26,91 @@
 export default {
   name: 'Header',
 
-  async fetch() {
-    const request = await this.$axios.get(
-      '/singletons/get/site_menu?token=4392f66d425f4a9210e31f5a58a753'
-    )
-    const data = request.data
-
-    const navItems = data.items
-    console.log(navItems)
+  data() {
+    return {
+      navItems: [],
+    }
   },
 
-  data() {},
+  created() {
+    this.makeNav()
+  },
 
-  computed: {},
+  methods: {
+    async makeNav() {
+      const endpoint =
+        '/singletons/get/site_menu?token=88dbdd6d5e5a0de6d44cd76e8418a0'
 
-  created() {},
+      await this.$axios
+        .$get(endpoint)
+        .then((response) => {
+          const responseItems = response.items
 
-  mounted() {},
+          responseItems.forEach((responseItem) => {
+            this.makeNavItem(responseItem)
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
 
-  methods: {},
+    async makeNavItem(responseItem) {
+      const targetSingleton = responseItem.value.singleton_name
+
+      const endpoint = `/singletons/get/${targetSingleton}?token=88dbdd6d5e5a0de6d44cd76e8418a0`
+
+      await this.$axios
+        .$get(endpoint)
+        .then((response) => {
+          const singletonAttrs = response.attributes
+          console.log(singletonAttrs)
+
+          let iconUrl = null
+
+          if (
+            singletonAttrs.icon.path !== '' &&
+            typeof singletonAttrs.icon.path !== 'undefined'
+          ) {
+            iconUrl = singletonAttrs.icon.path
+          }
+
+          let itemLabel = null
+
+          if (
+            responseItem.value.label !== '' &&
+            typeof responseItem.value.label !== 'undefined'
+          ) {
+            console.log('a')
+
+            itemLabel = responseItem.value.label
+          } else {
+            console.log('b')
+
+            itemLabel = singletonAttrs.title
+          }
+
+          let itemSlug = null
+
+          if (
+            singletonAttrs.slug !== '' &&
+            typeof singletonAttrs.slug !== 'undefined'
+          ) {
+            itemSlug = singletonAttrs.slug
+          }
+
+          const item = {
+            iconUrl,
+            itemLabel,
+            itemSlug,
+          }
+
+          this.navItems.push(item)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+  },
 }
 </script>
