@@ -67,7 +67,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: 'http://viktor-cms.local/api',
+    baseURL: 'https://cms.viktorchin.nl',
   },
 
   bootstrapVue: {
