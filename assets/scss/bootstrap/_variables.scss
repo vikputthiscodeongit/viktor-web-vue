@@ -69,7 +69,7 @@ $container-max-widths: (
 
 
 // Grid columns
-$grid-gutter-width:                2.5rem;
+$grid-gutter-width:                rem(40px);
 
 
 // Components
@@ -81,7 +81,7 @@ $font-family-sans-serif:      "Recursive", -apple-system, BlinkMacSystemFont, "S
 $font-family-monospace:       "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $font-family-base:            $font-family-sans-serif;
 
-$font-size-base:              1rem;
+$font-size-base:              rem(16px);
 
 $font-weight-normal:          400;
 $font-weight-bold:            600;
@@ -89,8 +89,8 @@ $font-weight-bold:            600;
 $font-weight-base:            $font-weight-normal;
 $line-height-base:            1.625;
 
-$h1-font-size:                2rem;
-$h2-font-size:                1.5rem;
+$h1-font-size:                rem(32px);
+$h2-font-size:                rem(24px);
 
 $headings-margin-bottom:      0;
 $headings-font-family:        $font-family-monospace;
@@ -98,14 +98,14 @@ $headings-font-weight:        $font-weight-bold;
 
 
 // Buttons
-$btn-padding-y:               0.875rem;
-$btn-padding-x:               1.375;
+$btn-padding-y:               rem(14px);
+$btn-padding-x:               rem(22px);
 $btn-font-family:             $headings-font-family;
 $btn-font-size:               $font-size-base;
 $btn-line-height:             1;
 
 $btn-font-weight:             $font-weight-base;
 
-$btn-border-radius:           100px;
+$btn-border-radius:           rem(100px);
 
 $btn-transition:              0.2s ease-in-out;

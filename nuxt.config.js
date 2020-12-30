@@ -49,6 +49,7 @@ export default {
 
   styleResources: {
     scss: [
+      'sass-rem/_rem.scss',
       '~/assets/scss/bootstrap/_variables.scss', // I want the Bootstrap variables to be available even after the Bootstrap components & utilities have been built.
       '~/assets/scss/mixins/mixins.scss',
       '~/assets/scss/_variables.scss',
