@@ -1,20 +1,21 @@
 <template>
   <header id="site-header" class="site-header">
     <div class="site-menu">
-      {{ navItems }}
-
       <nav class="site-navigation">
         <ul class="site-navigation__buttons" aria-label="Pagina's">
           <li v-for="navItem in navItems" :key="navItem.id">
-            <a class="site-navigation__link" href="#" target="_self">
-              <span class="site-navigation__icon">
-                <img src="#" alt="" />
+            <NuxtLink :to="navItem.itemLink">
+              <span
+                v-if="navItem.iconUrl !== null"
+                class="site-navigation__icon"
+              >
+                <img :src="navItem.iconUrl" alt="" />
               </span>
 
               <span class="site-navigation__title">
                 <span v-text="navItem.itemLabel"></span>
               </span>
-            </a>
+            </NuxtLink>
           </li>
         </ul>
       </nav>
@@ -23,8 +24,12 @@
 </template>
 
 <script>
+import myMixins from '~/plugins/mixins'
+
 export default {
   name: 'Header',
+
+  mixins: [myMixins],
 
   data() {
     return {
@@ -39,15 +44,15 @@ export default {
   methods: {
     async makeNav() {
       const endpoint =
-        '/singletons/get/site_menu?token=88dbdd6d5e5a0de6d44cd76e8418a0'
+        '/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb'
 
       await this.$axios
         .$get(endpoint)
         .then((response) => {
-          const responseItems = response.items
+          const resMenuItems = response.items
 
-          responseItems.forEach((responseItem) => {
-            this.makeNavItem(responseItem)
+          resMenuItems.forEach((resMenuItem) => {
+            this.makeNavItem(resMenuItem)
           })
         })
         .catch((error) => {
@@ -55,54 +60,38 @@ export default {
         })
     },
 
-    async makeNavItem(responseItem) {
-      const targetSingleton = responseItem.value.singleton_name
+    async makeNavItem(resMenuItem) {
+      const menuItemAttrs = resMenuItem.value
 
-      const endpoint = `/singletons/get/${targetSingleton}?token=88dbdd6d5e5a0de6d44cd76e8418a0`
+      const targetSingleton = menuItemAttrs.singleton_name
+
+      const endpoint = `/api/singletons/get/${targetSingleton}?token=7c4ceaf1719a244f87bd8710de20cb`
 
       await this.$axios
         .$get(endpoint)
         .then((response) => {
           const singletonAttrs = response.attributes
-          console.log(singletonAttrs)
 
-          let iconUrl = null
+          const iconUrl = this.isEmpty(singletonAttrs.icon.path)
+            ? null
+            : `${this.$axios.defaults.baseURL}/${singletonAttrs.icon.path}`
 
-          if (
-            singletonAttrs.icon.path !== '' &&
-            typeof singletonAttrs.icon.path !== 'undefined'
-          ) {
-            iconUrl = singletonAttrs.icon.path
-          }
+          const itemLabel = this.isEmpty(menuItemAttrs.label)
+            ? singletonAttrs.title
+            : menuItemAttrs.label
 
-          let itemLabel = null
+          let itemLink = this.isEmpty(singletonAttrs.slug)
+            ? null
+            : `/${singletonAttrs.slug}`
 
-          if (
-            responseItem.value.label !== '' &&
-            typeof responseItem.value.label !== 'undefined'
-          ) {
-            console.log('a')
-
-            itemLabel = responseItem.value.label
-          } else {
-            console.log('b')
-
-            itemLabel = singletonAttrs.title
-          }
-
-          let itemSlug = null
-
-          if (
-            singletonAttrs.slug !== '' &&
-            typeof singletonAttrs.slug !== 'undefined'
-          ) {
-            itemSlug = singletonAttrs.slug
+          if (itemLink === '/home') {
+            itemLink = '/'
           }
 
           const item = {
             iconUrl,
             itemLabel,
-            itemSlug,
+            itemLink,
           }
 
           this.navItems.push(item)
