@@ -9,26 +9,26 @@ export default {
       { charset: 'utf-8' },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        content: 'width=device-width, initial-scale=1, shrink-to-fit=no'
       },
       {
         hid: 'keywords',
         name: 'keywords',
-        content: 'Chin, Kon, Sung, Chin-Kon-Sung',
+        content: 'Chin, Kon, Sung, Chin-Kon-Sung'
       },
       {
         hid: 'description',
         name: 'description',
-        content: "Viktor Chin, a man who's very keen on motorised vehicles, nature, music, photography and many other things. By the way, I also build websites :).",
+        content: "Viktor Chin, a man who's very keen on motorised vehicles, nature, music, photography and many other things. By the way, I also build websites :)."
       },
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
-    ],
+        href: '/favicon.ico'
+      }
+    ]
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -44,7 +44,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    '@nuxtjs/style-resources',
+    '@nuxtjs/style-resources'
   ],
 
   styleResources: {
@@ -52,8 +52,8 @@ export default {
       'sass-rem/_rem.scss',
       '~/assets/scss/bootstrap/_variables.scss', // I want the Bootstrap variables to be available even after the Bootstrap components & utilities have been built.
       '~/assets/scss/mixins/mixins.scss',
-      '~/assets/scss/_variables.scss',
-    ],
+      '~/assets/scss/_variables.scss'
+    ]
   },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -63,19 +63,19 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
+    '@nuxtjs/pwa'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: 'https://cms.viktorchin.nl',
+    baseURL: 'https://cms.viktorchin.nl'
   },
 
   bootstrapVue: {
     bootstrapCss: false,
-    bootstrapVueCss: false,
+    bootstrapVueCss: false
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {}
 }

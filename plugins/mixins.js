@@ -1,7 +1,7 @@
 export default {
   methods: {
-    isEmpty(string) {
+    isEmpty (string) {
       return !string || string.length === 0
-    },
-  },
+    }
+  }
 }

@@ -9,7 +9,7 @@
                 v-if="navItem.iconUrl !== null"
                 class="site-navigation__icon"
               >
-                <img :src="navItem.iconUrl" alt="" />
+                <img :src="navItem.iconUrl" alt="">
               </span>
 
               <span class="site-navigation__title">
@@ -31,18 +31,18 @@ export default {
 
   mixins: [myMixins],
 
-  data() {
+  data () {
     return {
-      navItems: [],
+      navItems: []
     }
   },
 
-  created() {
+  created () {
     this.makeNav()
   },
 
   methods: {
-    async makeNav() {
+    async makeNav () {
       const endpoint =
         '/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb'
 
@@ -60,7 +60,7 @@ export default {
         })
     },
 
-    async makeNavItem(resMenuItem) {
+    async makeNavItem (resMenuItem) {
       const menuItemAttrs = resMenuItem.value
 
       const targetSingleton = menuItemAttrs.singleton_name
@@ -91,7 +91,7 @@ export default {
           const item = {
             iconUrl,
             itemLabel,
-            itemLink,
+            itemLink
           }
 
           this.navItems.push(item)
@@ -99,8 +99,8 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-    },
-  },
+    }
+  }
 }
 </script>
 
