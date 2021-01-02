@@ -62,8 +62,6 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    // https://go.nuxtjs.dev/bootstrap
-    'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
@@ -73,11 +71,6 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: 'https://cms.viktorchin.nl'
-  },
-
-  bootstrapVue: {
-    bootstrapCss: false,
-    bootstrapVueCss: false
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
