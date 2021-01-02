@@ -55,8 +55,7 @@ export default {
     makeNav() {
       const endpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
 
-      await this.$axios
-        .$get(endpoint)
+      this.$axios.$get(endpoint)
         .then((response) => {
           const resMenuItems = response.items;
 
@@ -69,16 +68,19 @@ export default {
         });
     },
 
-    async makeNavItem (resMenuItem) {
-      const menuItemAttrs = resMenuItem.value
+    makeNavItem(resMenuItem) {
+      console.log(resMenuItem.value.singleton_name);
 
-      const targetSingleton = menuItemAttrs.singleton_name
+      const menuItemAttrs = resMenuItem.value;
 
-      const endpoint = `/api/singletons/get/${targetSingleton}?token=7c4ceaf1719a244f87bd8710de20cb`
+      const targetSingleton = menuItemAttrs.singleton_name;
 
-      await this.$axios
-        .$get(endpoint)
+      const endpoint = `/api/singletons/get/${targetSingleton}?token=7c4ceaf1719a244f87bd8710de20cb`;
+
+      this.$axios.$get(endpoint)
         .then((response) => {
+          console.log(response.attributes.slug);
+
           const singletonAttrs = response.attributes;
 
           const iconUrl = this.isEmpty(singletonAttrs.icon.path)
