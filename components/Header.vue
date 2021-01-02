@@ -6,9 +6,11 @@
           <li
             v-for="navItem in navItems"
             :key="navItem.id"
+            class="site-navigation__button"
           >
             <NuxtLink
               :to="navItem.itemLink"
+              class="site-navigation__link"
             >
               <span
                 v-if="navItem.iconUrl !== null"
@@ -188,7 +190,7 @@ export default {
     &::after {
       $height: rem(1px);
 
-      content: '';
+      content: "";
       position: absolute;
       top: calc(100% - #{$height});
       left: 0;
@@ -199,8 +201,8 @@ export default {
       background-color: currentColor;
       transition: opacity $transition-base;
 
-      @at-root a:hover::after,
-        a[aria-current='page']::after {
+      @at-root .site-navigation__link:hover::after,
+               .site-navigation__link[aria-current="page"]::after {
         opacity: 1;
       }
     }
