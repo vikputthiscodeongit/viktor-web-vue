@@ -3,17 +3,25 @@
     <div class="site-menu">
       <nav class="site-navigation">
         <ul class="site-navigation__buttons" aria-label="Pagina's">
-          <li v-for="navItem in navItems" :key="navItem.id">
-            <NuxtLink :to="navItem.itemLink">
+          <li
+            v-for="navItem in navItems"
+            :key="navItem.id"
+          >
+            <NuxtLink
+              :to="navItem.itemLink"
+            >
               <span
                 v-if="navItem.iconUrl !== null"
                 class="site-navigation__icon"
               >
-                <img :src="navItem.iconUrl" alt="">
+                <img
+                  :src="navItem.iconUrl"
+                  alt=""
+                >
               </span>
 
               <span class="site-navigation__title">
-                <span v-text="navItem.itemLabel"></span>
+                <span v-text="navItem.itemLabel" />
               </span>
             </NuxtLink>
           </li>
@@ -24,40 +32,39 @@
 </template>
 
 <script>
-import myMixins from '~/plugins/mixins'
+import myMixins from "~/plugins/mixins";
 
 export default {
-  name: 'Header',
+  name: "Header",
 
   mixins: [myMixins],
 
-  data () {
+  data() {
     return {
       navItems: []
-    }
+    };
   },
 
-  created () {
-    this.makeNav()
+  created() {
+    this.makeNav();
   },
 
   methods: {
-    async makeNav () {
-      const endpoint =
-        '/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb'
+    makeNav() {
+      const endpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
 
       await this.$axios
         .$get(endpoint)
         .then((response) => {
-          const resMenuItems = response.items
+          const resMenuItems = response.items;
 
           resMenuItems.forEach((resMenuItem) => {
-            this.makeNavItem(resMenuItem)
-          })
+            this.makeNavItem(resMenuItem);
+          });
         })
         .catch((error) => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
 
     async makeNavItem (resMenuItem) {
@@ -70,38 +77,38 @@ export default {
       await this.$axios
         .$get(endpoint)
         .then((response) => {
-          const singletonAttrs = response.attributes
+          const singletonAttrs = response.attributes;
 
           const iconUrl = this.isEmpty(singletonAttrs.icon.path)
             ? null
-            : `${this.$axios.defaults.baseURL}/${singletonAttrs.icon.path}`
+            : `${this.$axios.defaults.baseURL}/${singletonAttrs.icon.path}`;
 
           const itemLabel = this.isEmpty(menuItemAttrs.label)
             ? singletonAttrs.title
-            : menuItemAttrs.label
+            : menuItemAttrs.label;
 
           let itemLink = this.isEmpty(singletonAttrs.slug)
             ? null
-            : `/${singletonAttrs.slug}`
+            : `/${singletonAttrs.slug}`;
 
-          if (itemLink === '/home') {
-            itemLink = '/'
+          if (itemLink === "/home") {
+            itemLink = "/";
           }
 
           const item = {
             iconUrl,
             itemLabel,
             itemLink
-          }
+          };
 
-          this.navItems.push(item)
+          this.navItems.push(item);
         })
         .catch((error) => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -157,7 +164,7 @@ export default {
 
     &:hover,
     &:focus,
-    &[aria-current='page'] {
+    &[aria-current="page"] {
       opacity: 1;
     }
 
@@ -174,7 +181,7 @@ export default {
       outline-offset: 0;
     }
 
-    &[aria-current='page'] {
+    &[aria-current="page"] {
       color: $primary;
     }
 

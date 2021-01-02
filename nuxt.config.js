@@ -32,27 +32,31 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['~/assets/scss/bootstrap/bootstrap.scss'],
+  css: [
+    '~/assets/scss/bootstrap/bootstrap.scss'
+  ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: [
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
     '@nuxtjs/style-resources'
   ],
 
   styleResources: {
     scss: [
       'sass-rem/_rem.scss',
-      '~/assets/scss/bootstrap/_variables.scss', // I want the Bootstrap variables to be available even after the Bootstrap components & utilities have been built.
-      '~/assets/scss/mixins/mixins.scss',
-      '~/assets/scss/_variables.scss'
+      'bootstrap/scss/_functions.scss',
+      '~/assets/scss/bootstrap/_variables.scss',
+      'bootstrap/scss/_variables.scss',
+      'bootstrap/scss/_mixins.scss',
+      '~/assets/scss/_variables.scss',
+      '~/assets/scss/mixins/mixins.scss'
     ]
   },
 
@@ -63,7 +67,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -77,5 +81,6 @@ export default {
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {}
+  build: {
+  }
 }
