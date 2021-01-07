@@ -5,6 +5,20 @@
   </div>
 </template>
 
+<script>
+export default {
+  mounted() {
+    this.$el.addEventListener("mousedown", function() {
+        document.body.classList.add("using-mouse");
+    });
+
+    this.$el.addEventListener("keydown", function() {
+        document.body.classList.remove("using-mouse");
+    });
+  }
+}
+</script>
+
 <style lang="scss">
 body {
   min-width: $body-min-width;
