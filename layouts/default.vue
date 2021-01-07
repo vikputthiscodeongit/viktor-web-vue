@@ -121,33 +121,4 @@ p {
   }
 }
 //
-
-.site-header {
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: rem(56px);
-  background-color: $white;
-  box-shadow: 0 0 rem(5px) 0 rgba(0, 0, 0, 0.25);
-
-  @include respond-above(sm) {
-    bottom: rem(8px);
-    left: 50%;
-    width: rem(480px);
-    height: rem(62px);
-    border-radius: rem(6px);
-    box-shadow: 0 0 rem(6px) rem(1px) rgba(0, 0, 0, 0.25);
-    transform: translateX(-50%);
-  }
-
-  @include respond-above(md) {
-    width: rem(540px);
-  }
-
-  @include respond-above(xl) {
-    width: rem(640px);
-  }
-}
 </style>

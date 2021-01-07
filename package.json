@@ -10,16 +10,16 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
-    "@nuxtjs/pwa": "^3.0.2",
+    "@nuxtjs/pwa": "^3.3.4",
     "bootstrap": "^4.5.3",
     "core-js": "^3.8.2",
     "nuxt": "^2.14.6",
-    "nuxt-i18n": "^6.16.0"
+    "nuxt-i18n": "^6.17.0"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",
     "fibers": "^5.0.0",
-    "sass": "^1.32.0",
+    "sass": "^1.32.2",
     "sass-loader": "^10.1.0",
     "sass-rem": "^2.0.1"
   }
