@@ -1,45 +1,8 @@
 <template>
-    <form>
-        <div class="form__group first-of-class">
-            <div class="field field--ifl">
-            <label for="contact-email" class="form__label">E-mailadres *</label>
-            [email* contact-email class:form__input id:contact-email
-            maxlength:128 placeholder "mail@voorbeeld.nl"]
-            </div>
-
-            <div class="field field--ifl">
-            <label for="contact-name" class="form__label">Naam</label>
-            [text contact-name class:form__input id:contact-name maxlength:128
-            placeholder "Peter Zwart"]
-            </div>
-        </div>
-
-        <div class="form__group">
-            <div class="field field--ifl">
-            <label for="contact-subject" class="form__label">Onderwerp *</label>
-            [text* contact-subject class:form__input id:contact-subject
-            maxlength:128 placeholder "Ik wil het graag met je hebben over..."]
-            </div>
-
-            <div class="field field--ifl">
-            <label for="contact-message" class="form__label">Message *</label>
-            [textarea* contact-message class:form__input id:contact-message
-            rows:8 placeholder "Deze prachtige website; erg prachtig, helemaal
-            tof."]
-            </div>
-        </div>
-
-        <div class="form__group">[cf7mc]</div>
-
-        <div class="form__group">
-            <span>* veld is vereisd</span>
-
-            <div class="field field--inline">
-            [submit class:btn class:btn--primary string-send:Verzend
-            string-sending "Aan het verzenden"]
-            </div>
-        </div>
-    </form>
+  <FormulateForm
+    v-model="formValues"
+    :schema="formGroups"
+  />
 </template>
 
 <script>
@@ -48,64 +11,56 @@ export default {
 
   data() {
     return {
-      formFields: []
+      formGroups: [],
+      formValues: {}
     }
   },
 
-  created() {
-    // Code
-  },
-
   mounted() {
-    this.makeForm();
+    this.generateFormGroupsData();
+
+    console.log(this.formGroups);
   },
 
   methods: {
-    makeForm() {
+    generateFormGroupsData() {
       const endpoint = "/api/singletons/get/form_contact?token=7c4ceaf1719a244f87bd8710de20cb";
 
       this.$axios.$get(endpoint)
         .then((response) => {
-            console.log(response);
+          // console.log(response);
 
-            const groupsObj = response.groups;
-            const groupsArr = groupsObj.group;
+          const groupsObj = response.groups;
+          const groupsArr = groupsObj.group;
 
-            groupsArr.forEach((group) => {
-                this.makeFormGroup(group);
+          groupsArr.forEach((groupObj) => {
+            const groupIndex = groupsArr.indexOf(groupObj);
+
+            const groupArr = groupObj.value;
+
+            groupArr.forEach((fieldObj) => {
+              const fieldIndex = groupArr.indexOf(fieldObj);
+
+              const field = fieldObj.value;
+
+              this.generateFormFieldData(field, groupIndex, fieldIndex);
             });
+          });
         })
         .catch((error) => {
           console.log(error);
         });
     },
 
-    makeFormGroup(group) {
-        const fields = group.value;
+    generateFormFieldData(field, groupIndex, fieldIndex) {
+      if (fieldIndex === 0) {
+        this.formGroups[groupIndex] = {
+          type: "group",
+          children: []
+        };
+      }
 
-        fields.forEach((field) => {
-            this.makeFormField(field);
-        });
-    },
-
-    makeFormField(field) {
-    //   console.log(field);
-
-      const label = field.value.label;
-
-      this.makeFormLabel(label);
-
-      const input = field.value.input;
-
-      this.makeFormInput(input);
-    },
-
-    makeFormLabel(label) {
-        console.log(label);
-    },
-
-    makeFormInput(input) {
-        console.log(input);
+      this.formGroups[groupIndex].children.push(field);
     }
   }
 };
