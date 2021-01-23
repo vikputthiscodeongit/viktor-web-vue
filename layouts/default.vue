@@ -28,10 +28,10 @@ body {
   text-size-adjust: 100%;
 
   // TODO: DEZE MEDIA QUERY WORDT ONTERECHT GETRIGGERED OP MIJN LAPTOP IN CHROME (en mogelijk Firefox).
-  @media (-webkit-min-device-pixel-ratio: 2) {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  // @media (-webkit-min-device-pixel-ratio: 2) {
+  //   -webkit-font-smoothing: antialiased;
+  //   -moz-osx-font-smoothing: grayscale;
+  // }
 }
 
 ol, ul {
