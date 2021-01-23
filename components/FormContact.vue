@@ -1,8 +1,17 @@
 <template>
   <FormulateForm
-    v-model="formValues"
     :schema="formGroups"
   />
+  <!-- <form>
+    <FormulateInput
+      v-for="field in formFields"
+      :key="field.name"
+      :label="field.label"
+      :type="field.type"
+      :name="field.name"
+      :placeholder="field.placeholder"
+    />
+  </form> -->
 </template>
 
 <script>
@@ -12,14 +21,55 @@ export default {
   data() {
     return {
       formGroups: [],
-      formValues: {}
+      formFields: []
     }
   },
 
   mounted() {
     this.generateFormGroupsData();
 
+    this.formFields = [
+      {
+        type: 'group',
+        repeatable: true,
+        name: 'addresses',
+        addLabel: '+ Address',
+        children: [
+          {
+            name: 'street',
+            label: 'Street address'
+          },
+          {
+            name: 'city',
+            label: 'City',
+          },
+          {
+            component: 'div',
+            class: 'double-row',
+            children: [
+              {
+                name: 'state',
+                type: 'select',
+                label: 'State',
+                options: {
+                  va: 'Virginia',
+                  fl: 'Florida',
+                  ne: 'Nebraska',
+                  ca: 'California'
+                },
+              },
+              {
+                name: 'zip',
+                label: 'Zip',
+              },
+            ]
+          }
+        ]
+      }
+    ];
+
     console.log(this.formGroups);
+    console.log(this.formFields);
   },
 
   methods: {
