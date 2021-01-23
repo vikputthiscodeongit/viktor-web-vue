@@ -74,6 +74,12 @@ export default {
     baseURL: 'https://cms.viktorchin.nl'
   },
 
+  pwa: {
+    icon: {
+      sizes: [ 192, 512 ]
+    }
+  },
+
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {}
 }
