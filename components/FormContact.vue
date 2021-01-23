@@ -2,16 +2,6 @@
   <FormulateForm
     :schema="formGroups"
   />
-  <!-- <form>
-    <FormulateInput
-      v-for="field in formFields"
-      :key="field.name"
-      :label="field.label"
-      :type="field.type"
-      :name="field.name"
-      :placeholder="field.placeholder"
-    />
-  </form> -->
 </template>
 
 <script>
@@ -20,56 +10,13 @@ export default {
 
   data() {
     return {
-      formGroups: [],
-      formFields: []
+      formGroups: []
     }
   },
 
   mounted() {
     this.generateFormGroupsData();
-
-    this.formFields = [
-      {
-        type: 'group',
-        repeatable: true,
-        name: 'addresses',
-        addLabel: '+ Address',
-        children: [
-          {
-            name: 'street',
-            label: 'Street address'
-          },
-          {
-            name: 'city',
-            label: 'City',
-          },
-          {
-            component: 'div',
-            class: 'double-row',
-            children: [
-              {
-                name: 'state',
-                type: 'select',
-                label: 'State',
-                options: {
-                  va: 'Virginia',
-                  fl: 'Florida',
-                  ne: 'Nebraska',
-                  ca: 'California'
-                },
-              },
-              {
-                name: 'zip',
-                label: 'Zip',
-              },
-            ]
-          }
-        ]
-      }
-    ];
-
     console.log(this.formGroups);
-    console.log(this.formFields);
   },
 
   methods: {
@@ -102,10 +49,10 @@ export default {
 
     generateFormFieldData(fieldObj, groupIndex, fieldIndex) {
       if (fieldIndex === 0) {
-        this.formGroups[groupIndex] = {
+        this.$set(this.formGroups, groupIndex, {
           type: "group",
           children: []
-        }
+        });
       }
 
       const label = fieldObj.value.label;
@@ -115,10 +62,29 @@ export default {
         label: label.text,
         type: input.type,
         name: input.name,
-        placeholder: input.placeholder
+        placeholder: input.placeholder,
+        validation: "optional|"
       };
 
-      this.formGroups[groupIndex].children.push(field);
+      if (input.required) {
+        field.validation = "^required|";
+
+        if (input.type === "email") {
+          field.validation += "email|";
+        }
+      }
+
+      if (input.minlength !== null) {
+        field.validation += `min:${input.minlength}|`;
+      }
+
+      if (input.maxlength !== null) {
+        field.validation += `max:${input.maxlength}|`;
+      }
+
+      field.validation = field.validation.slice(0, -1); // Remove the last |.
+
+      this.$set(this.formGroups[groupIndex].children, fieldIndex, field);
     }
   }
 };
