@@ -41,9 +41,7 @@ export default {
             groupArr.forEach((fieldObj) => {
               const fieldIndex = groupArr.indexOf(fieldObj);
 
-              const field = fieldObj.value;
-
-              this.generateFormFieldData(field, groupIndex, fieldIndex);
+              this.generateFormFieldData(fieldObj, groupIndex, fieldIndex);
             });
           });
         })
@@ -52,13 +50,23 @@ export default {
         });
     },
 
-    generateFormFieldData(field, groupIndex, fieldIndex) {
+    generateFormFieldData(fieldObj, groupIndex, fieldIndex) {
       if (fieldIndex === 0) {
         this.formGroups[groupIndex] = {
           type: "group",
           children: []
-        };
+        }
       }
+
+      const label = fieldObj.value.label;
+      const input = fieldObj.value.input;
+
+      const field = {
+        label: label.text,
+        type: input.type,
+        name: input.name,
+        placeholder: input.placeholder
+      };
 
       this.formGroups[groupIndex].children.push(field);
     }
