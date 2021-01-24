@@ -32,13 +32,23 @@ export default {
 
           groupsArr.forEach((groupObj) => {
             const groupIndex = groupsArr.indexOf(groupObj);
+            let lastGroup = false;
+
+            if (groupIndex === groupsArr.length - 1) {
+              lastGroup = true;
+            }
 
             const groupArr = groupObj.value;
 
             groupArr.forEach((fieldObj) => {
               const fieldIndex = groupArr.indexOf(fieldObj);
+              let lastEntry = false;
 
-              this.generateFormFieldData(fieldObj, groupIndex, fieldIndex);
+              if (lastGroup && fieldIndex === groupArr.length - 1) {
+                lastEntry = true;
+              }
+
+              this.generateFormFieldData(fieldObj, groupIndex, fieldIndex, lastEntry);
             });
           });
         })
@@ -47,7 +57,7 @@ export default {
         });
     },
 
-    generateFormFieldData(fieldObj, groupIndex, fieldIndex) {
+    generateFormFieldData(fieldObj, groupIndex, fieldIndex, lastEntry) {
       if (fieldIndex === 0) {
         this.$set(this.formGroups, groupIndex, {
           type: "group",
@@ -85,6 +95,18 @@ export default {
       field.validation = field.validation.slice(0, -1); // Remove the last |.
 
       this.$set(this.formGroups[groupIndex].children, fieldIndex, field);
+
+      if (lastEntry) {
+        this.$set(this.formGroups, [groupIndex + 1], {
+          type: "group",
+          children: [
+            {
+              label: "Send message",
+              type: "submit"
+            }
+          ]
+        });
+      }
     }
   }
 };
