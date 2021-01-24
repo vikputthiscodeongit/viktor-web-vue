@@ -68,8 +68,6 @@ export default {
         });
     },
 
-      console.log(resMenuItem.value.singleton_name);
-
     makeNavItem(resMenuItem, itemIndex) {
       const menuItemAttrs = resMenuItem.value;
 
@@ -79,8 +77,6 @@ export default {
 
       this.$axios.$get(endpoint)
         .then((response) => {
-          console.log(response.attributes.slug);
-
           const singletonAttrs = response.attributes;
 
           const iconUrl = isEmpty(singletonAttrs.icon.path)

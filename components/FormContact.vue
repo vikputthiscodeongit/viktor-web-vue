@@ -16,7 +16,6 @@ export default {
 
   mounted() {
     this.generateFormGroupsData();
-    console.log(this.formGroups);
   },
 
   methods: {
@@ -25,8 +24,6 @@ export default {
 
       this.$axios.$get(endpoint)
         .then((response) => {
-          // console.log(response);
-
           const groupsObj = response.groups;
           const groupsArr = groupsObj.group;
 
