@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div id="layout-components">
     <Header />
 
-    <Nuxt />
+    <main class="site-main">
+      <Nuxt />
+    </main>
   </div>
 </template>
 
@@ -136,4 +138,34 @@ p {
   }
 }
 //
+
+.site-main {
+  height: calc(100vh - #{rem(56px)}); // 100vh - .site-header height
+  padding-top: rem(20px);
+  padding-bottom: rem(20px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  @include respond-above(sm) {
+    height: calc(100vh - #{rem(62px)} - #{rem(8px)}); // 100vh - .site-header height - .site-header bottom
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: $off-white-light;
+
+    &-track {
+      background-color: $off-white-light;
+      border-radius: 100px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &-thumb {
+      background-color: $gray-light;
+      border-radius: 100px;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
 </style>
