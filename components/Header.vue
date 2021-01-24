@@ -58,7 +58,9 @@ export default {
           const resMenuItems = response.items;
 
           resMenuItems.forEach((resMenuItem) => {
-            this.makeNavItem(resMenuItem);
+            const itemIndex = resMenuItems.indexOf(resMenuItem);
+
+            this.makeNavItem(resMenuItem, itemIndex);
           });
         })
         .catch((error) => {
@@ -66,9 +68,9 @@ export default {
         });
     },
 
-    makeNavItem(resMenuItem) {
       console.log(resMenuItem.value.singleton_name);
 
+    makeNavItem(resMenuItem, itemIndex) {
       const menuItemAttrs = resMenuItem.value;
 
       const targetSingleton = menuItemAttrs.singleton_name;
@@ -103,7 +105,7 @@ export default {
             itemLink
           };
 
-          this.navItems.push(item);
+          this.navItems.splice(itemIndex, 0, item);
         })
         .catch((error) => {
           console.log(error);
