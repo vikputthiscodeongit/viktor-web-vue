@@ -69,6 +69,7 @@ export default {
       const input = fieldObj.value.input;
 
       const field = {
+        outerClass: [ `formulate-input--${label.type}` ],
         label: label.text,
         type: input.type,
         name: input.name,
@@ -76,7 +77,13 @@ export default {
         validation: "optional|"
       };
 
+      if (input.type === "textarea") {
+        field.rows = 8;
+      }
+
       if (input.required) {
+        field.label += " *";
+
         field.validation = "^required|";
 
         if (input.type === "email") {
@@ -113,28 +120,16 @@ export default {
 </script>
 
 <style lang="scss">
-.form {
+.formulate-form {
   margin-top: rem(30px);
 
   @include respond-above(md) {
     margin-top: rem(40px);
   }
-
-  &__group {
-    margin-top: rem(30px);
-
-    @include respond-above(md) {
-      margin-top: rem(40px);
-    }
-
-    &:first-child,
-    &.first-of-class {
-      margin-top: 0;
-    }
-  }
 }
 
-.field {
+.formulate-input {
+  position: relative;
   max-width: $input-max-width;
 
   @include respond-above(xl) {
@@ -145,16 +140,19 @@ export default {
     max-width: $input-xxl-max-width;
   }
 
-  &--ifl {
-    position: relative;
+  &[data-type="group"] {
+    margin-top: rem(30px);
+
+    @include respond-above(md) {
+      margin-top: rem(40px);
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
-  &--inline {
-    display: flex;
-    align-items: center;
-  }
-
-  .form__group & {
+  & + &:not([data-type="group"]) {
     margin-top: rem(20px);
 
     @include respond-above(md) {
@@ -165,6 +163,17 @@ export default {
       margin-top: 0;
     }
   }
+
+  &-wrapper {
+    .formulate-input--ifl > & {
+      position: relative;
+    }
+
+    .formulate-input--inline > & {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 label {
@@ -172,7 +181,7 @@ label {
   font-family: $headings-font-family;
   font-weight: $headings-font-weight;
 
-  .field--ifl & {
+  .formulate-input--ifl > .formulate-input-wrapper > & {
     position: absolute;
     top: rem(2px);
     left: rem(2px);
@@ -193,154 +202,161 @@ label {
     }
   }
 
-  .field--inline & {
+  .formulate-input--inline > .formulate-input-wrapper > & {
     flex-shrink: 0;
     margin-bottom: 0;
+    margin-right: rem(8px);
   }
 }
 
-// Input types that preferable should not be targeted, but are with the current selector: button, checkbox, color, file, hidden, image, radio, range, reset & submit.
-input,
-textarea {
-  width: 100%;
-  padding: rem(12px);
-  line-height: $line-height-base;
-  font-size: $font-size-base;
-  background-color: $off-white-dark;
-  border: rem(2px) solid $off-white-dark;
-  border-radius: rem(4px);
-  transition: border-color $transition-base;
-
-  @media (prefers-contrast: high) {
-    background-color: $white;
-    border-color: $black;
-  }
-
-  &:focus {
-    border-color: $blue;
-    outline: none;
-
-    .field.is-valid & {
-      border-color: $success;
-    }
-  }
-
-  .form.invalid .field.is-invalid & {
-    border-color: $warning;
-  }
-
-  .field--ifl & {
-    padding-top: rem(31px);
-    padding-bottom: rem(8px);
-  }
-
-  .field--inline label + & {
-    margin-left: rem(8px);
-  }
-
-  //
-  // Input placeholder styling
-  &::-webkit-input-placeholder {
-    color: $gray;
-  }
-
-  &::-moz-placeholder {
-    color: $gray;
-  }
-
-  &:-ms-input-placeholder {
-    color: $gray;
-  }
-
-  &::placeholder {
-    color: $gray;
-  }
-}
-
-input {
-  &[type="checkbox"],
-  &[type="radio"] {
-    width: auto;
-  }
-
-  //
-  // Reset default :invalid styles.
-  // General (IE, maybe more)
-  &:invalid {
-    outline: none;
-  }
-
-  // Gecko
-  &:-moz-ui-invalid {
-    box-shadow: none;
-  }
-
-  //
-  // Autocomplete styling for WebKit-based browsers.
-  &:-webkit-autofill,
-  &:-internal-autofill-selected {
-    box-shadow: 0 0 0 1000px $off-white-dark inset; // Equalling <input> height should suffice?
+.formulate-input-element {
+  // Input types that preferably should not be targeted, but are with the current selector: button, checkbox, color, file, hidden, image, radio, range, reset & submit.
+  > input,
+  > textarea {
+    width: 100%;
+    padding: rem(12px);
+    line-height: $line-height-base;
+    font-size: $font-size-base;
+    background-color: $off-white-dark;
+    border: rem(2px) solid $off-white-dark;
+    border-radius: rem(4px);
+    transition: border-color $transition-base;
 
     @media (prefers-contrast: high) {
-      box-shadow: 0 0 0 1000px $white inset;
+      background-color: $white;
+      border-color: $black;
+    }
+
+    &:focus {
+      border-color: $blue;
+      outline: none;
+
+      .formulate-input[data-has-value]:not([data-has-errors]) > .formulate-input-wrapper > & {
+        border-color: $success;
+      }
+    }
+
+    .formulate-input[data-is-showing-errors] > .formulate-input-wrapper > & {
+      border-color: $warning;
+    }
+
+    .formulate-input--ifl > .formulate-input-wrapper > & {
+      padding-top: rem(31px);
+      padding-bottom: rem(8px);
+    }
+
+    //
+    // Input placeholder styling
+    &::-webkit-input-placeholder {
+      color: $gray;
+    }
+
+    &::-moz-placeholder {
+      color: $gray;
+    }
+
+    &:-ms-input-placeholder {
+      color: $gray;
+    }
+
+    &::placeholder {
+      color: $gray;
     }
   }
 
-  .field--ifl & {
-    height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
+  > input {
+    &[type="checkbox"],
+    &[type="radio"] {
+      width: auto;
+    }
+
+    //
+    // Reset default :invalid styles.
+    // General (IE, maybe more)
+    &:invalid {
+      outline: none;
+    }
+
+    // Gecko
+    &:-moz-ui-invalid {
+      box-shadow: none;
+    }
+
+    //
+    // Autocomplete styling for WebKit-based browsers.
+    &:-webkit-autofill,
+    &:-internal-autofill-selected {
+      box-shadow: 0 0 0 1000px $off-white-dark inset; // Equalling <input> height should suffice?
+
+      @media (prefers-contrast: high) {
+        box-shadow: 0 0 0 1000px $white inset;
+      }
+    }
+
+    .formulate-input--ifl > .formulate-input-wrapper > & {
+      height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
+    }
+
+    .formulate-input--inline > .formulate-input-wrapper > & {
+      &[type="number"],
+      &[inputmode="numeric"] {
+        width: rem(64px);
+      }
+    }
   }
 
-  .field--inline & {
-    &[type="number"],
-    &[inputmode="numeric"] {
-      width: rem(64px);
+  > textarea {
+    display: block;
+  }
+
+  > button {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    padding: $btn-padding-y $btn-padding-x;
+    text-decoration: none;
+    font: $btn-font-weight $btn-font-size/$btn-line-height $btn-font-family;
+    color: $white;
+    background-color: $blue;
+    border: none;
+    border-radius: $btn-border-radius;
+    transition: $btn-transition;
+    transition-property: background-color, box-shadow;
+
+    @include respond-above(xs) {
+      width: auto;
+    }
+
+    &:hover {
+      &:not(:disabled) {
+        background-color: darken($blue, 5%);
+      }
+
+      &:disabled {
+        cursor: default;
+      }
+    }
+
+    &:focus {
+      box-shadow: 0 0 rem(8px) rem(2px) rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    &__spinner {
+      margin-left: rem(8px);
+
+      .btn:not(.is-submitting) & {
+        display: none;
+      }
     }
   }
 }
 
-textarea {
-  display: block;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  width: 100%;
-  padding: $btn-padding-y $btn-padding-x;
-  text-decoration: none;
-  font: $btn-font-weight $btn-font-size/$btn-line-height $btn-font-family;
-  color: $white;
-  background-color: $blue;
-  border: none;
-  border-radius: $btn-border-radius;
-  transition: $btn-transition;
-  transition-property: background-color, box-shadow;
-
-  @include respond-above(xs) {
-    width: auto;
-  }
-
-  &:hover {
-    &:not(:disabled) {
-      background-color: darken($blue, 5%);
-    }
-
-    &:disabled {
-      cursor: default;
-    }
-  }
-
-  &:focus {
-    box-shadow: 0 0 rem(8px) rem(2px) rgba(0, 0, 0, 0.2);
-    outline: none;
-  }
-
-  &__spinner {
-    margin-left: rem(8px);
-
-    .btn:not(.is-submitting) & {
-      display: none;
-    }
-  }
+.formulate-input-errors {
+  position: absolute;
+  margin-top: rem(2px);
+  padding-left: rem(12px);
+  list-style: none;
+  font-size: rem(12px);
 }
 </style>
