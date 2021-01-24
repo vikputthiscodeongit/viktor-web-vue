@@ -34,12 +34,10 @@
 </template>
 
 <script>
-import myMixins from "~/plugins/mixins";
+import isEmpty from "lodash/isEmpty";
 
 export default {
   name: "Header",
-
-  mixins: [myMixins],
 
   data() {
     return {
@@ -83,15 +81,15 @@ export default {
 
           const singletonAttrs = response.attributes;
 
-          const iconUrl = this.isEmpty(singletonAttrs.icon.path)
+          const iconUrl = isEmpty(singletonAttrs.icon.path)
             ? null
             : `${this.$axios.defaults.baseURL}/${singletonAttrs.icon.path}`;
 
-          const itemLabel = this.isEmpty(menuItemAttrs.label)
+          const itemLabel = isEmpty(menuItemAttrs.label)
             ? singletonAttrs.title
             : menuItemAttrs.label;
 
-          let itemLink = this.isEmpty(singletonAttrs.slug)
+          let itemLink = isEmpty(singletonAttrs.slug)
             ? null
             : `/${singletonAttrs.slug}`;
 
