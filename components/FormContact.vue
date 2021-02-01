@@ -11,47 +11,51 @@ export default {
   data() {
     return {
       formGroups: []
-    }
+    };
   },
 
   mounted() {
-    this.generateFormGroupsData();
+    this.makeForm();
   },
 
   methods: {
-    generateFormGroupsData() {
-      const endpoint = "/api/singletons/get/form_contact?token=7c4ceaf1719a244f87bd8710de20cb";
+    makeForm() {
+      const formDataEndpoint = "/api/singletons/get/form_contact?token=7c4ceaf1719a244f87bd8710de20cb";
 
-      this.$axios.$get(endpoint)
-        .then((response) => {
-          const groupsObj = response.groups;
-          const groupsArr = groupsObj.group;
+      this.processFormData(formDataEndpoint);
+    },
 
-          groupsArr.forEach((groupObj) => {
-            const groupIndex = groupsArr.indexOf(groupObj);
-            let lastGroup = false;
+    async processFormData(endpoint) {
+      try {
+        const response = await this.$axios.$get(endpoint);
 
-            if (groupIndex === groupsArr.length - 1) {
-              lastGroup = true;
+        const groupsObj = response.groups;
+        const groupsArr = groupsObj.group;
+
+        groupsArr.forEach((groupObj, i) => {
+          const groupIndex = i;
+          let lastGroup = false;
+
+          if (groupIndex + 1 === groupsArr.length) {
+            lastGroup = true;
+          }
+
+          const groupArr = groupObj.value;
+
+          groupArr.forEach((fieldObj, i) => {
+            const fieldIndex = i;
+            let lastEntry = false;
+
+            if (lastGroup && fieldIndex + 1 === groupArr.length) {
+              lastEntry = true;
             }
 
-            const groupArr = groupObj.value;
-
-            groupArr.forEach((fieldObj) => {
-              const fieldIndex = groupArr.indexOf(fieldObj);
-              let lastEntry = false;
-
-              if (lastGroup && fieldIndex === groupArr.length - 1) {
-                lastEntry = true;
-              }
-
-              this.generateFormFieldData(fieldObj, groupIndex, fieldIndex, lastEntry);
-            });
+            this.generateFormFieldData(fieldObj, groupIndex, fieldIndex, lastEntry);
           });
-        })
-        .catch((error) => {
-          console.log(error);
         });
+      } catch(error) {
+        console.log(error);
+      }
     },
 
     generateFormFieldData(fieldObj, groupIndex, fieldIndex, lastEntry) {
