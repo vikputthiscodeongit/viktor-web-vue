@@ -51,7 +51,6 @@ export default {
 
   styleResources: {
     scss: [
-      '~/assets/scss/_variables.scss',
       "sass-rem/_rem.scss",
       "bootstrap/scss/_functions.scss",
       "~/assets/scss/bootstrap/_variables.scss",

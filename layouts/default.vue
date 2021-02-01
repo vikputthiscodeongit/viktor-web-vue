@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss">
 body {
-  min-width: $body-min-width;
+  min-width: rem(320px);
   margin-left: auto;
   margin-right: auto;
   text-size-adjust: 100%;

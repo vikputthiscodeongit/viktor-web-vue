@@ -127,14 +127,14 @@ export default {
 
 .formulate-input {
   position: relative;
-  max-width: $input-max-width;
+  max-width: rem(640px);
 
   @include respond-above(xl) {
-    max-width: $input-xl-max-width;
+    max-width: rem(800px);
   }
 
   @include respond-above(xxl) {
-    max-width: $input-xxl-max-width;
+    max-width: rem(880px);
   }
 
   &[data-type="group"] {
