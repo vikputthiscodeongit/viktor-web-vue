@@ -11,12 +11,12 @@
 <script>
 export default {
   mounted() {
-    document.addEventListener("mousedown", function() {
-        document.body.classList.add("using-mouse");
+    document.addEventListener("mousedown", () => {
+      document.body.classList.add("using-mouse");
     });
 
-    document.addEventListener("keydown", function() {
-        document.body.classList.remove("using-mouse");
+    document.addEventListener("keydown", () => {
+      document.body.classList.remove("using-mouse");
     });
   }
 }
