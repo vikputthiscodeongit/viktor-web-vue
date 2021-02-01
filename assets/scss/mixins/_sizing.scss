@@ -41,7 +41,6 @@
     overflow: hidden;
     transform: translate(-50%, -50%);
 
-                font-family: "object-fit: contain;"; // Add support for object-fit-images polyfill
     > img {
       @if $image-size == contain {
         object-fit: contain;
