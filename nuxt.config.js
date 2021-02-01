@@ -81,6 +81,14 @@ export default {
     }
   },
 
+  i18n: {
+    locales: ["en", "nl"],
+    defaultLocale: "nl",
+    vueI18n: {
+      fallbackLocale: "en"
+    }
+  },
+
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {}
 }
