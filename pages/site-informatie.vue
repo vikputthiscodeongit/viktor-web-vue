@@ -1,12 +1,17 @@
 <template>
   <section class="site-section">
-    <!-- Code -->
+    <span>site-informatie.vue</span>
   </section>
 </template>
 
 <script>
 export default {
-  // Code
+  nuxtI18n: {
+    paths: {
+      nl: "/site-informatie",
+      en: "/site-information"
+    }
+  }
 };
 </script>
 
