@@ -1,5 +1,5 @@
 <template>
-  <header id="site-header" class="site-header">
+  <header class="site-header">
     <div class="site-menu">
       <nav class="site-navigation">
         <ul class="site-navigation__buttons" aria-label="Pagina's">
@@ -51,21 +51,44 @@ export default {
 
   methods: {
     makeNav() {
-      const endpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
+      // const endpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
 
-      this.$axios.$get(endpoint)
-        .then((response) => {
-          const resMenuItems = response.items;
+      // this.$axios.$get(endpoint)
+      //   .then((response) => {
+      //     const resMenuItems = response.items;
 
-          resMenuItems.forEach((resMenuItem) => {
-            const itemIndex = resMenuItems.indexOf(resMenuItem);
+      //     resMenuItems.forEach((resMenuItem) => {
+      //       const itemIndex = resMenuItems.indexOf(resMenuItem);
 
-            this.makeNavItem(resMenuItem, itemIndex);
-          });
-        })
-        .catch((error) => {
-          console.log(error);
+      //       this.makeNavItem(resMenuItem, itemIndex);
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+
+      const siteMenuDataEndpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
+
+      this.getMenuItems(siteMenuDataEndpoint);
+    },
+
+    async getMenuItems(endpoint) {
+      try {
+        const response = await this.$axios.$get(endpoint);
+
+        const menuItems = response.items;
+
+        menuItems.forEach((menuItem, i) => {
+          console.log(menuItem.value.singleton_name);
+
+          const itemIndex = i;
+          console.log(itemIndex);
+
+          this.makeNavItem(menuItem, itemIndex);
         });
+      } catch(error) {
+        console.log(error);
+      }
     },
 
     makeNavItem(resMenuItem, itemIndex) {
