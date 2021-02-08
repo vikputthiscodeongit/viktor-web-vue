@@ -83,8 +83,10 @@ export default {
   i18n: {
     locales: ["en", "nl"],
     defaultLocale: "nl",
-    vueI18n: {
-      fallbackLocale: "en"
+    detectBrowserLanguage: {
+      alwaysRedirect: true, // I probably want to revert this setting to default on live.
+      onlyOnNoPrefix: true,
+      cookieKey: "site_language"
     }
   },
 
