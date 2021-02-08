@@ -51,84 +51,74 @@ export default {
 
   methods: {
     makeNav() {
-      // const endpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
+      const endpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
 
-      // this.$axios.$get(endpoint)
-      //   .then((response) => {
-      //     const resMenuItems = response.items;
-
-      //     resMenuItems.forEach((resMenuItem) => {
-      //       const itemIndex = resMenuItems.indexOf(resMenuItem);
-
-      //       this.makeNavItem(resMenuItem, itemIndex);
-      //     });
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-
-      const siteMenuDataEndpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
-
-      this.getMenuItems(siteMenuDataEndpoint);
+      this.getMenuData(endpoint);
     },
 
-    async getMenuItems(endpoint) {
+    async getMenuData(endpoint) {
       try {
         const response = await this.$axios.$get(endpoint);
 
         const menuItems = response.items;
 
         menuItems.forEach((menuItem, i) => {
-          console.log(menuItem.value.singleton_name);
+          const menuItemIndex = i;
 
-          const itemIndex = i;
-          console.log(itemIndex);
-
-          this.makeNavItem(menuItem, itemIndex);
+          this.getSingletonData(menuItem, menuItemIndex);
         });
       } catch(error) {
         console.log(error);
       }
     },
 
-    makeNavItem(resMenuItem, itemIndex) {
-      const menuItemAttrs = resMenuItem.value;
+    async getSingletonData(menuItem, menuItemIndex) {
+      try {
+        const menuItemLabel = menuItem.value.label;
+        const singletonName = menuItem.value.singleton_name;
 
-      const targetSingleton = menuItemAttrs.singleton_name;
+        const endpoint = `/api/singletons/get/${singletonName}?token=7c4ceaf1719a244f87bd8710de20cb`;
 
-      const endpoint = `/api/singletons/get/${targetSingleton}?token=7c4ceaf1719a244f87bd8710de20cb`;
+        const response = await this.$axios.get(endpoint);
+        console.log(response);
 
-      this.$axios.$get(endpoint)
-        .then((response) => {
-          const singletonAttrs = response.attributes;
+        let singletonAttrs = response.data.attributes;
 
-          const iconUrl = isEmpty(singletonAttrs.icon.path)
-            ? null
-            : `${this.$axios.defaults.baseURL}/${singletonAttrs.icon.path}`;
 
-          const itemLabel = isEmpty(menuItemAttrs.label)
-            ? singletonAttrs.title
-            : menuItemAttrs.label;
+        this.makeNavItem(singletonAttrs, menuItemIndex, menuItemLabel);
+      } catch(error) {
+        console.log(error);
+      }
+    },
 
-          let itemLink = isEmpty(singletonAttrs.slug)
-            ? null
-            : `/${singletonAttrs.slug}`;
+    makeNavItem(singletonAttrs, menuItemIndex, menuItemLabel) {
+      try {
+        const iconUrl = isEmpty(singletonAttrs.icon.path)
+          ? null
+          : `${this.$axios.defaults.baseURL}/${singletonAttrs.icon.path}`;
 
-          if (itemLink === "/home") {
-            itemLink = "/";
-          }
+        const itemLabel = isEmpty(menuItemLabel)
+          ? singletonAttrs.title
+          : menuItemLabel;
 
-          const item = {
-            iconUrl,
-            itemLabel,
-            itemLink
-          };
+        let itemLink = isEmpty(singletonAttrs.slug)
+          ? null
+          : `/${singletonAttrs.slug}`;
 
-          this.navItems.splice(itemIndex, 0, item);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        if (itemLink === "/home") {
+          itemLink = "/";
+        }
+
+        const item = {
+          iconUrl,
+          itemLabel,
+          itemLink
+        };
+
+        this.navItems.splice(menuItemIndex, 0, item);
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
 };
