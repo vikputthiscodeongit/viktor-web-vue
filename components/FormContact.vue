@@ -20,9 +20,9 @@ export default {
 
   methods: {
     makeForm() {
-      const formDataEndpoint = "/api/singletons/get/form_contact?token=7c4ceaf1719a244f87bd8710de20cb";
+      const endpoint = "/api/singletons/get/form_contact?token=7c4ceaf1719a244f87bd8710de20cb";
 
-      this.processFormData(formDataEndpoint);
+      this.processFormData(endpoint);
     },
 
     async processFormData(endpoint) {
