@@ -84,6 +84,9 @@ export default {
 
         let singletonAttrs = response.data.attributes;
 
+        if (this.$i18n.locale !== this.$i18n.defaultLocale) {
+          singletonAttrs = `response.data.attributes_${this.$i18n.locale}`;
+        }
 
         this.makeNavItem(singletonAttrs, menuItemIndex, menuItemLabel);
       } catch(error) {
