@@ -10,7 +10,25 @@
 
 <script>
 export default {
+  methods: {
+    siteSectionSetHeight() {
+      // Elementen selecteren met een ref?
+      const siteMain = this.$el.querySelector(".site-main");
+      const siteSections = this.$el.querySelectorAll(".site-section");
+
+      if (siteSections.length === 1) {
+        // const siteMainHeight = siteMain.getBoundingClientRect().height;
+        // const siteMainPaddingTop = siteMainHeight padding-top
+        // const siteSectionTargetHeight = siteMainHeight - (2 * siteMainPaddingTop)
+
+        // Set siteSections[0] height to siteSectionTargetHeight
+      }
+    }
+  },
+
   mounted() {
+    this.siteSectionSetHeight();
+
     document.addEventListener("mousedown", () => {
       document.body.classList.add("using-mouse");
     });
@@ -28,12 +46,31 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-size-adjust: 100%;
+  scrollbar-width: thin;
 
   // TODO: DEZE MEDIA QUERY WORDT ONTERECHT GETRIGGERED OP MIJN LAPTOP IN CHROME (en mogelijk Firefox).
   // @media (-webkit-min-device-pixel-ratio: 2) {
   //   -webkit-font-smoothing: antialiased;
   //   -moz-osx-font-smoothing: grayscale;
   // }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: $off-white-light;
+
+    &-track {
+      background-color: $off-white-light;
+      border-radius: 100px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &-thumb {
+      background-color: $gray-light;
+      border-radius: 100px;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+    }
+  }
 }
 
 ol, ul {
@@ -140,32 +177,14 @@ p {
 //
 
 .site-main {
-  height: calc(100vh - #{rem(56px)}); // 100vh - .site-header height
+  min-height: calc(100vh - #{rem(56px)});
+  margin-bottom: rem(56px);
   padding-top: rem(20px);
   padding-bottom: rem(20px);
-  overflow-y: auto;
-  scrollbar-width: thin;
 
   @include respond-above(sm) {
-    height: calc(100vh - #{rem(62px)} - #{rem(8px)}); // 100vh - .site-header height - .site-header bottom
-  }
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    background-color: $off-white-light;
-
-    &-track {
-      background-color: $off-white-light;
-      border-radius: 100px;
-      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
-    &-thumb {
-      background-color: $gray-light;
-      border-radius: 100px;
-      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
-    }
+    min-height: calc(100vh - (#{rem(62px)} + #{rem(8px)}));
+    margin-bottom: rem(62px) + rem(8px);
   }
 }
 </style>
