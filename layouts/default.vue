@@ -176,6 +176,11 @@ p {
 }
 //
 
+.grid {
+  display: grid;
+  height: 100%;
+}
+
 .site-main {
   min-height: calc(100vh - #{rem(56px)});
   margin-bottom: rem(56px);
