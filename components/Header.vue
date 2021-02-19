@@ -80,7 +80,6 @@ export default {
         const endpoint = `/api/singletons/get/${singletonName}?token=7c4ceaf1719a244f87bd8710de20cb`;
 
         const response = await this.$axios.get(endpoint);
-        console.log(response);
 
         let singletonAttrs = response.data.attributes;
 
