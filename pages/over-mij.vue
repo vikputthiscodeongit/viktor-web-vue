@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  nuxtI18n: {
-    paths: {
-      nl: "/over-mij",
-      en: "/about"
-    }
-  }
+  // nuxtI18n: {
+  //   paths: {
+  //     nl: "/over-mij",
+  //     en: "/about"
+  //   }
+  // }
 };
 </script>
 

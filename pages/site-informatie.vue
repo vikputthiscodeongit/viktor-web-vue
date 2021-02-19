@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  nuxtI18n: {
-    paths: {
-      nl: "/site-informatie",
-      en: "/site-information"
-    }
-  }
+  // nuxtI18n: {
+  //   paths: {
+  //     nl: "/site-informatie",
+  //     en: "/site-information"
+  //   }
+  // }
 };
 </script>
 

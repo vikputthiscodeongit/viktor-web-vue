@@ -65,8 +65,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // https://go.nuxtjs.dev/pwa
-    "@nuxtjs/pwa",
-    "nuxt-i18n"
+    "@nuxtjs/pwa"
+    // "nuxt-i18n"
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -80,15 +80,15 @@ export default {
     }
   },
 
-  i18n: {
-    locales: ["en", "nl"],
-    defaultLocale: "nl",
-    detectBrowserLanguage: {
-      alwaysRedirect: true, // I probably want to revert this setting to default on live.
-      onlyOnNoPrefix: true,
-      cookieKey: "site_language"
-    }
-  },
+  // i18n: {
+  //   locales: ["en", "nl"],
+  //   defaultLocale: "nl",
+  //   detectBrowserLanguage: {
+  //     alwaysRedirect: true, // I probably want to revert this setting to default on live.
+  //     onlyOnNoPrefix: true,
+  //     cookieKey: "site_language"
+  //   }
+  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {}
