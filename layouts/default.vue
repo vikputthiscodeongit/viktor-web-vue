@@ -83,28 +83,52 @@ h2, .h2 {
 }
 
 h1, .h1 {
-  font-size: $h1-font-size;
+  font-size: rem(28px);
+
+  @include respond-above(md) {
+    font-size: rem(32px);
+  }
+
+  @include respond-above(xl) {
+    font-size: rem(38px);
+  }
 }
 
 h2, .h2 {
-  font-size: $h2-font-size;
-}
+  font-size: rem(24px);
 
-.title {
-  + * {
-    margin-top: rem(24px);
-
-    @include respond-above(md) {
-      margin-top: rem(30px);
-    }
+  @include respond-above(md) {
+    font-size: rem(26px);
   }
 
-  .title + & {
-    margin-top: rem(8px);
+  @include respond-above(xl) {
+    font-size: rem(30px);
+  }
+}
 
-    @include respond-above(md) {
-      margin-top: rem(12px);
-    }
+// .title {
+//   + * {
+//     margin-top: rem(24px);
+
+//     @include respond-above(md) {
+//       margin-top: rem(30px);
+//     }
+//   }
+
+//   .title + & {
+//     margin-top: rem(8px);
+
+//     @include respond-above(md) {
+//       margin-top: rem(12px);
+//     }
+//   }
+// }
+
+.title {
+  margin-bottom: rem(24px);
+
+  @include respond-above(md) {
+    margin-bottom: rem(30px);
   }
 }
 
@@ -114,16 +138,16 @@ p {
   }
 }
 
-.text {
-  .text + &,
-  .media + & {
-    margin-top: rem(20px);
+// .text {
+//   .text + &,
+//   .media + & {
+//     margin-top: rem(20px);
 
-    @include respond-above(md) {
-      margin-top: rem(24px);
-    }
-  }
-}
+//     @include respond-above(md) {
+//       margin-top: rem(24px);
+//     }
+//   }
+// }
 
 // This code block is taken directly from Bootstrap 4.5.3's Grid component (_grid.scss).
 .container,
