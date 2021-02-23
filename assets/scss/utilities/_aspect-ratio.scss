@@ -1,5 +1,9 @@
 .aspect-ratio {
-  &--default {
-    @include aspect-ratio(3, 2);
+  // &--default {
+  //   @include aspect-ratio(3, 2);
+  // }
+
+  &--square {
+    @include aspect-ratio(1, 1);
   }
 }
