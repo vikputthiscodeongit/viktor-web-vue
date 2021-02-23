@@ -24,6 +24,10 @@ export default {
     ],
     link: [
       {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Recursive:wght@400;600&display=swap"
+      },
+      {
         rel: "icon",
         type: "image/x-icon",
         href: "/favicon.ico"
