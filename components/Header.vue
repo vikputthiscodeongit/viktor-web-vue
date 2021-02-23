@@ -3,13 +3,38 @@
     <div class="site-menu">
       <nav class="site-navigation">
         <ul class="site-navigation__buttons" aria-label="Pagina's">
-          <li
+          <!-- <li
             v-for="navItem in navItems"
             :key="navItem.id"
             class="site-navigation__button"
           >
             <NuxtLink
               :to="navItem.itemLink"
+              class="site-navigation__link"
+            >
+              <span
+                v-if="navItem.iconUrl !== null"
+                class="site-navigation__icon"
+              >
+                <img
+                  :src="navItem.iconUrl"
+                  alt=""
+                >
+              </span>
+
+              <span class="site-navigation__title">
+                <span v-text="navItem.itemLabel" />
+              </span>
+            </NuxtLink>
+          </li> -->
+
+          <li
+            v-for="navItem in navItems2"
+            :key="navItem.id"
+            class="site-navigation__button"
+          >
+            <NuxtLink
+              :to="navItem.itemSlug"
               class="site-navigation__link"
             >
               <span
@@ -41,12 +66,35 @@ export default {
 
   data() {
     return {
-      navItems: []
+      navItems: [],
+
+      navItems2: [
+        {
+          iconUrl: require("~/assets/icons/teenyicons-home-alt.svg"),
+          itemLabel: "Home",
+          itemSlug: "/"
+        },
+        {
+          iconUrl: require("~/assets/icons/teenyicons-user-square.svg"),
+          itemLabel: "Over mij",
+          itemSlug: "/over-mij"
+        },
+        {
+          iconUrl: require("~/assets/icons/teenyicons-message-text-alt.svg"),
+          itemLabel: "Contact",
+          itemSlug: "/contact"
+        },
+        {
+          iconUrl: require("~/assets/icons/teenyicons-cog.svg"),
+          itemLabel: "Instellingen",
+          itemSlug: "/site-instellingen"
+        },
+      ]
     };
   },
 
   created() {
-    this.makeNav();
+    // this.makeNav();
   },
 
   methods: {
