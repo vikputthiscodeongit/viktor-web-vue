@@ -10,25 +10,7 @@
 
 <script>
 export default {
-  methods: {
-    siteSectionSetHeight() {
-      // Elementen selecteren met een ref?
-      const siteMain = this.$el.querySelector(".site-main");
-      const siteSections = this.$el.querySelectorAll(".site-section");
-
-      if (siteSections.length === 1) {
-        // const siteMainHeight = siteMain.getBoundingClientRect().height;
-        // const siteMainPaddingTop = siteMainHeight padding-top
-        // const siteSectionTargetHeight = siteMainHeight - (2 * siteMainPaddingTop)
-
-        // Set siteSections[0] height to siteSectionTargetHeight
-      }
-    }
-  },
-
   mounted() {
-    this.siteSectionSetHeight();
-
     document.addEventListener("mousedown", () => {
       document.body.classList.add("using-mouse");
     });
@@ -178,7 +160,6 @@ p {
 
 .grid {
   display: grid;
-  height: 100%;
 }
 
 .site-main {
