@@ -1,6 +1,10 @@
 <template>
-  <FormulateForm
+  <!-- <FormulateForm
     :schema="formGroups"
+  /> -->
+
+  <FormulateForm
+    :schema="formSchema"
   />
 </template>
 
@@ -10,12 +14,67 @@ export default {
 
   data() {
     return {
-      formGroups: []
+      formGroups: [],
+
+      formSchema: [
+        {
+          type: "group",
+          children: [
+            {
+              label: "Naam",
+              name: "name",
+              type: "text",
+              placeholder: "Peter Beuk",
+              validation: "optional",
+              outerClass: [ "formulate-input--ifl" ]
+            },
+            {
+              label: "E-mailadres *",
+              name: "email",
+              type: "email",
+              placeholder: "emailadres@voorbeeld.nl",
+              validation: "^required|email|max:128",
+              outerClass: [ "formulate-input--ifl" ]
+            }
+          ]
+        },
+        {
+          type: "group",
+          children: [
+            {
+              label: "Onderwerp *",
+              name: "subject",
+              type: "text",
+              placeholder: "Ik wil het met je hebben over...",
+              validation: "^required|max:128",
+              outerClass: [ "formulate-input--ifl" ]
+            },
+            {
+              label: "Bericht *",
+              name: "message",
+              type: "textarea",
+              placeholder: "Wat een mooie website dit is. Wow, echt leuk. Super tof. Bla bla, die bla bloep.",
+              rows: 8,
+              validation: "^required|min:16",
+              outerClass: [ "formulate-input--ifl" ]
+            }
+          ]
+        },
+        {
+          type: "group",
+          children: [
+            {
+              label: "Verstuur bericht",
+              type: "submit"
+            }
+          ]
+        }
+      ]
     };
   },
 
   mounted() {
-    this.makeForm();
+    // this.makeForm();
   },
 
   methods: {
