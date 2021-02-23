@@ -372,7 +372,6 @@ label {
   > button {
     display: inline-flex;
     align-items: center;
-    width: 100%;
     padding: $btn-padding-y $btn-padding-x;
     text-decoration: none;
     font: $btn-font-weight $btn-font-size/$btn-line-height $btn-font-family;
@@ -383,8 +382,9 @@ label {
     transition: $btn-transition;
     transition-property: background-color, box-shadow;
 
-    @include respond-above(xs) {
-      width: auto;
+    @include respond-below(xs) {
+      justify-content: center;
+      width: 100%;
     }
 
     &:hover {
@@ -413,10 +413,6 @@ label {
 }
 
 .formulate-input-errors {
-  position: absolute;
-  margin-top: rem(2px);
-  padding-left: rem(12px);
-  list-style: none;
-  font-size: rem(12px);
+  @include sr-only();
 }
 </style>
