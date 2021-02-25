@@ -2,12 +2,7 @@
   <div id="layout-components">
     <Header />
 
-    <main
-      ref="siteMain"
-      class="site-main"
-    >
-      <Nuxt />
-    </main>
+    <Nuxt />
   </div>
 </template>
 

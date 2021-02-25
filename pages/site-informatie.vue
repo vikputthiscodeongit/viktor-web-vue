@@ -1,7 +1,11 @@
 <template>
-  <section class="site-section">
-    <span>site-informatie.vue</span>
-  </section>
+  <main class="site-main" id="site-info">
+    <section class="site-section">
+      <div class="container">
+        <span>site-informatie.vue</span>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>

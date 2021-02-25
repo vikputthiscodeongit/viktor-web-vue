@@ -1,7 +1,11 @@
 <template>
-  <section class="site-section">
-    <span>site-instellingen.vue</span>
-  </section>
+  <main class="site-main" id="site-settings">
+    <section class="site-section">
+      <div class="container">
+        <span>site-instellingen.vue</span>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
