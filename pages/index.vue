@@ -18,8 +18,8 @@
           <span
             v-for="string in aboutStrings"
             :key="string.id"
-            v-text="string"
           />
+              v-text="string + ' '"
         </div>
       </div>
 
@@ -81,17 +81,23 @@ export default {
         deleteSpeed: 45,
         loop: true
       })
+        // 1
         .type(this.aboutStrings[0], {delay: 2000})
         .delete(null, {delay: 1100})
-        .type("Webdevlo", {delay: 333})
+        // 2
+        .type("Webdevlo", {delay: 500})
         .move(-2, {speed: 150, delay: 500})
         .type("e", {delay: 500})
         .move(2, {speed: 100, delay: 500})
         .type("per", {delay: 2250})
         .delete(null, {delay: 1000})
+        // 3
         .type(this.aboutStrings[2], {delay: 2000})
         .delete(null, {delay: 1000})
-        .type(this.aboutStrings[3], {delay: 2400})
+        // 4
+        .type("Hobbu-", {delay: 1000})
+        .delete(2, {delay: 550})
+        .type("yfotograaf", {delay: 2400})
         .go();
     }
   }
