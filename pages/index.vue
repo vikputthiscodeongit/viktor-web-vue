@@ -1,6 +1,5 @@
 <template>
   <section
-    ref="sectionHome"
     class="site-section"
   >
     <div class="container-fluid grid">
@@ -58,23 +57,10 @@ export default {
   },
 
   mounted() {
-    this.setSiteSectionHeight();
-
     this.typeAboutStrings();
   },
 
   methods: {
-    setSiteSectionHeight() {
-      console.log(this.$refs);
-
-      const main = this.$refs.siteMain;
-      const mainHeight = `${main.getBoundingClientRect().height}px`;
-
-      const sectionHome = this.$refs.sectionHome;
-
-      sectionHome.style.height = mainHeight;
-    },
-
     typeAboutStrings() {
       new TypeIt(".about-strings--typed", {
         speed: 75,
@@ -109,7 +95,6 @@ export default {
   grid-template-columns: repeat(12, minmax(10px, 1fr));
   // grid-template-rows: repeat(2, auto);
   grid-template-rows: 1fr auto 1fr;
-  height: 100%;
 
   // @include respond-above(xl) {
   //   grid-row-gap: 15vh;
@@ -120,6 +105,11 @@ export default {
     padding-bottom: 10vh;
   }
 }
+    min-height: calc(100vh - #{rem(56px)} - (2 * #{rem(20px)}));
+
+    @include respond-above(sm) {
+      min-height: calc(100vh - #{rem(62px)} - #{rem(8px)} - (2 * #{rem(20px)}));
+    }
 
 .home-title {
   grid-row: 1;
