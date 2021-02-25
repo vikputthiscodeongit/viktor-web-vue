@@ -92,19 +92,14 @@ export default {
 
 <style lang="scss">
 .grid {
-  grid-template-columns: repeat(12, minmax(10px, 1fr));
-  // grid-template-rows: repeat(2, auto);
-  grid-template-rows: 1fr auto 1fr;
-
-  // @include respond-above(xl) {
-  //   grid-row-gap: 15vh;
-  // }
 
   @media (min-height: 720px) {
     padding-top: 10vh;
     padding-bottom: 10vh;
   }
 }
+    grid-template-columns: repeat(12, minmax(10px, 1fr));
+    grid-template-rows: repeat(3, 1fr);
     min-height: calc(100vh - #{rem(56px)} - (2 * #{rem(20px)}));
 
     @include respond-above(sm) {
