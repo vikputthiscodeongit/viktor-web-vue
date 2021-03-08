@@ -2,7 +2,9 @@
   <main class="site-main" id="site-settings">
     <section class="site-section">
       <div class="container">
-        <span>site-instellingen.vue</span>
+        <div class="title">
+          <h1>site-instellingen.vue</h1>
+        </div>
       </div>
     </section>
   </main>

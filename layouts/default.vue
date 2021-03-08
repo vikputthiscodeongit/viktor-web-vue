@@ -1,5 +1,5 @@
 <template>
-  <div id="layout-components">
+  <div id="layout-default">
     <Header />
 
     <Nuxt />
@@ -28,7 +28,8 @@ body {
   text-size-adjust: 100%;
   scrollbar-width: thin;
 
-  // TODO: DEZE MEDIA QUERY WORDT ONTERECHT GETRIGGERED OP MIJN LAPTOP IN CHROME (en mogelijk Firefox).
+  // To do: fix deze media query.
+  // Wordt op het moment triggered op mijn laptop in (Chrome en mogelijk Firefox).
   // @media (-webkit-min-device-pixel-ratio: 2) {
   //   -webkit-font-smoothing: antialiased;
   //   -moz-osx-font-smoothing: grayscale;
@@ -64,7 +65,7 @@ a {
   transition-property: text-decoration-color, color, outline;
 
   &:focus {
-    outline: rem(2px) solid currentColor; // Not defining outline-color as currentColor results in :focus outline-color equalling <body> color in IE.
+    outline: rem(2px) solid currentColor;
     outline-offset: rem(2px);
 
     .using-mouse & {
