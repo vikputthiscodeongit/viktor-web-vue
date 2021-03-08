@@ -183,28 +183,23 @@ export default {
 .formulate-form {
   margin-top: rem(30px);
 
-  @include respond-above(md) {
+  @media (min-width: 768px) and (min-height: 600px) {
     margin-top: rem(40px);
+  }
+
+  @media (min-width: 1200px) and (min-height: 720px) {
+    font-size: $font-size-lg;
   }
 }
 
 .formulate-input {
   position: relative;
-  max-width: rem(640px);
-
-  @include respond-above(xl) {
-    max-width: rem(800px);
-  }
-
-  @include respond-above(xxl) {
-    max-width: rem(880px);
-  }
 
   &[data-type="group"] {
-    margin-top: rem(30px);
+    margin-top: 1.875em;
 
-    @include respond-above(md) {
-      margin-top: rem(40px);
+    @media (min-width: 768px) and (min-height: 600px) {
+      margin-top: 2.5em;
     }
 
     &:first-child {
@@ -213,10 +208,10 @@ export default {
   }
 
   & + &:not([data-type="group"]) {
-    margin-top: rem(20px);
+    margin-top: 1.25em;
 
-    @include respond-above(md) {
-      margin-top: rem(30px);
+    @media (min-width: 768px) and (min-height: 600px) {
+      margin-top: 1.875em;
     }
 
     &:first-child {
@@ -242,20 +237,22 @@ label {
   font-weight: $headings-font-weight;
 
   .formulate-input--ifl > .formulate-input-wrapper > & {
+    $scale: 1 / 0.8125;
+
     position: absolute;
-    top: rem(2px);
-    left: rem(2px);
-    right: rem(2px);
+    top: 0.125em;
+    left: 0.125em;
+    right: 0.125em;
     z-index: 1;
     margin-bottom: 0;
-    padding: rem(13px) rem(12px) rem(5px);
+    padding: 0.8125em * $scale 0.75em * $scale 0.3125em * $scale;
     line-height: 1;
-    font-size: rem(13px);
+    font-size: 0.8125em;
     font-weight: $font-weight-base;
     color: $blue;
     background-color: $off-white-dark;
-    border-top-left-radius: rem(4px);
-    border-top-right-radius: rem(4px);
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
 
     @media (prefers-contrast: high) {
       background-color: $white;
@@ -265,7 +262,7 @@ label {
   .formulate-input--inline > .formulate-input-wrapper > & {
     flex-shrink: 0;
     margin-bottom: 0;
-    margin-right: rem(8px);
+    margin-right: 0.5em;
   }
 }
 
@@ -274,12 +271,10 @@ label {
   > input,
   > textarea {
     width: 100%;
-    padding: rem(12px);
-    line-height: $line-height-base;
-    font-size: $font-size-base;
+    padding: 0.75em;
     background-color: $off-white-dark;
-    border: rem(2px) solid $off-white-dark;
-    border-radius: rem(4px);
+    border: 0.125em solid $off-white-dark;
+    border-radius: 0.25em;
     transition: border-color $transition-base;
 
     @media (prefers-contrast: high) {
@@ -301,8 +296,8 @@ label {
     }
 
     .formulate-input--ifl > .formulate-input-wrapper > & {
-      padding-top: rem(31px);
-      padding-bottom: rem(8px);
+      padding-top: 1.9375em;
+      padding-bottom: 0.5em;
     }
 
     //
@@ -354,13 +349,13 @@ label {
     }
 
     .formulate-input--ifl > .formulate-input-wrapper > & {
-      height: rem(69px); // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
+      height: 4.3125em; // Setting a fixed height is sadly the only way to guarantee consistent appearance across browsers.
     }
 
     .formulate-input--inline > .formulate-input-wrapper > & {
       &[type="number"],
       &[inputmode="numeric"] {
-        width: rem(64px);
+        width: 4em;
       }
     }
   }
@@ -372,9 +367,10 @@ label {
   > button {
     display: inline-flex;
     align-items: center;
-    padding: $btn-padding-y $btn-padding-x;
+    padding: 0.875em 1.375em;
     text-decoration: none;
-    font: $btn-font-weight $btn-font-size/$btn-line-height $btn-font-family;
+    font-family: $btn-font-family;
+    font-weight: $btn-font-weight;
     color: $white;
     background-color: $blue;
     border: none;
@@ -398,12 +394,12 @@ label {
     }
 
     &:focus {
-      box-shadow: 0 0 rem(8px) rem(2px) rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 0.5em 0.125em rgba(0, 0, 0, 0.2);
       outline: none;
     }
 
     &__spinner {
-      margin-left: rem(8px);
+      margin-left: 0.5em;
 
       .btn:not(.is-submitting) & {
         display: none;

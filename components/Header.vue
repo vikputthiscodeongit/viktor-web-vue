@@ -185,21 +185,17 @@ export default {
   background-color: $white;
   box-shadow: 0 0 rem(5px) 0 rgba(0, 0, 0, 0.25);
 
-  @include respond-above(sm) {
+  @media (min-width: 568px) and (min-height: 480px) {
     bottom: rem(8px);
     left: 50%;
-    width: rem(480px);
+    width: rem(540px);
     height: rem(62px);
     border-radius: rem(6px);
     box-shadow: 0 0 rem(6px) rem(1px) rgba(0, 0, 0, 0.25);
     transform: translateX(-50%);
   }
 
-  @include respond-above(md) {
-    width: rem(540px);
-  }
-
-  @include respond-above(xl) {
+  @media (min-width: 1200px) and (min-height: 600px) {
     width: rem(640px);
   }
 }
@@ -250,7 +246,7 @@ export default {
     transition: $transition-base;
     transition-property: opacity, color;
 
-    @include respond-above(sm) {
+    @media (min-width: 768px) and (min-height: 600px) {
       padding-top: rem(4px);
     }
 
@@ -306,7 +302,7 @@ export default {
   &__title {
     font: $headings-font-weight 0.625rem/ 1.15 $headings-font-family;
 
-    @include respond-above(sm) {
+    @media (min-width: 768px) and (min-height: 600px) {
       font-size: rem(11px);
     }
   }
@@ -315,7 +311,7 @@ export default {
     margin-bottom: rem(6px);
     height: rem(25px);
 
-    @include respond-above(sm) {
+    @media (min-width: 768px) and (min-height: 600px) {
       height: rem(30px);
       margin-bottom: rem(8px);
     }

@@ -92,34 +92,72 @@ export default {
 
 <style lang="scss">
 #home {
-  .grid {
-    grid-template-columns: repeat(12, minmax(10px, 1fr));
-    grid-template-rows: repeat(3, 1fr);
-    min-height: calc(100vh - #{rem(56px)} - (2 * #{rem(20px)}));
+  @media (min-height: 600px) {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+  }
 
-    @include respond-above(sm) {
-      min-height: calc(100vh - #{rem(62px)} - #{rem(8px)} - (2 * #{rem(20px)}));
+  .grid {
+    grid-row-gap: rem(18px);
+
+    @media (min-height: 480px) {
+      grid-template-rows: repeat(3, 1fr);
+      min-height: calc(100vh - #{rem(56px)} - (2 * #{rem(20px)}));
+
+      @include respond-above(sm) {
+        min-height: calc(100vh - #{rem(62px)} - #{rem(8px)} - (2 * #{rem(20px)}));
+      }
     }
 
-    @media (min-height: 720px) {
-      padding-top: 10vh;
-      padding-bottom: 10vh;
+    @media (min-height: 600px) {
+      min-height: calc(100vh - #{rem(56px)} - (2 * 10vh));
+
+      @include respond-above(sm) {
+        min-height: calc(100vh - #{rem(62px)} - #{rem(8px)} - (2 * 10vh));
+      }
+    }
+
+    @media (min-width: 768px) and (min-height: 600px) {
+      grid-template-rows: unset;
+      grid-row-gap: unset;
+      min-height: unset;
     }
   }
 
   .home-title {
-    grid-column: 3 / span 8;
+    grid-column: 1 / span 12;
     grid-row: 1;
 
-    h1 {
-      font-size: rem(44px);
+    @include respond-above(xs) {
+      grid-column: 2 / span 10;
+    }
 
-      @include respond-above(md) {
-        font-size: rem(52px);
+    @include respond-above(md) {
+      grid-column: 3 / span 8;
+    }
+
+    @media (min-height: 480px) {
+      align-self: flex-end;
+    }
+
+    @media (min-width: 768px) and (min-height: 600px) {
+      align-self: unset;
+      margin-bottom: rem(48px);
+    }
+
+    @media (min-width: 1200px) and (min-height: 720px) {
+      margin-bottom: rem(56px);
+    }
+
+    h1 {
+      font-size: rem(40px);
+
+      @media (min-width: 768px) and (min-height: 600px) {
+        font-size: rem(48px);
       }
 
-      @include respond-above(xl) {
-        font-size: rem(72px);
+      @media (min-width: 1200px) and (min-height: 720px) {
+        font-size: rem(58px);
       }
     }
 
@@ -134,19 +172,32 @@ export default {
 
   .about-strings {
     &-wrapper {
-      grid-column: 4 / span 6;
+      grid-column: 2 / span 10;
       grid-row: 2;
+      align-self: center;
+
+      @include respond-above(xs) {
+        grid-column: 3 / span 8;
+      }
+
+      @include respond-above(md) {
+        grid-column: 4 / span 6;
+      }
+
+      @media (min-width: 768px) and (min-height: 600px) {
+        align-self: unset;
+      }
     }
 
     &--typed {
-      font-size: rem(22px);
+      font-size: rem(24px);
 
-      @include respond-above(md) {
-        font-size: rem(26px);
+      @media (min-width: 768px) and (min-height: 600px) {
+        font-size: rem(28px);
       }
 
-      @include respond-above(xl) {
-        font-size: rem(36px);
+      @media (min-width: 1200px) and (min-height: 720px) {
+        font-size: rem(32px);
       }
     }
   }

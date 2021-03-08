@@ -1,7 +1,7 @@
 <template>
   <main class="site-main" id="contact">
     <section class="site-section">
-      <div class="container">
+      <div class="container grid">
         <div class="title">
           <h1>Lorem ipsum dolor sit amet</h1>
         </div>
@@ -15,3 +15,29 @@
     </section>
   </main>
 </template>
+
+<style lang="scss">
+.grid > * {
+  grid-column: 1 / span 12;
+
+  @include respond-above(md) {
+    grid-column: 1 / span 10;
+  }
+
+  @include respond-above(lg) {
+    grid-column: 1 / span 9;
+  }
+}
+
+.title {
+  grid-row: 1;
+}
+
+.text {
+  grid-row: 2;
+}
+
+.formulate-form {
+  grid-row: 3;
+}
+</style>

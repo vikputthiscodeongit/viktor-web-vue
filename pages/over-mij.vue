@@ -37,8 +37,6 @@ export default {
 
 #about {
   .grid {
-    grid-template-columns: repeat(12, minmax(10px, 1fr));
-
     @include respond-above(md) {
       grid-template-rows: rem(200px) repeat(2, auto);
     }
@@ -55,6 +53,14 @@ export default {
   .media {
     grid-column: 1 / span 12;
 
+    @include respond-above(xs) {
+      grid-column: 2 / span 10;
+    }
+
+    @include respond-above(sm) {
+      grid-column: 3 / span 8;
+    }
+
     @include respond-below(md) {
       margin-bottom: rem(40px);
     }
@@ -65,7 +71,7 @@ export default {
     }
 
     @include respond-above(lg) {
-      grid-column: 1 / span 6;
+      grid-column: 2 / span 6;
     }
   }
 
@@ -76,15 +82,11 @@ export default {
     @include respond-above(md) {
       position: relative;
       z-index: 1;
-      grid-column: 5 / span 8;
+      grid-column: 6 / span 7;
     }
 
     @include respond-above(lg) {
-      grid-column: 5 / span 6;
-    }
-
-    @include respond-above(xl) {
-      grid-column: 6 / span 5;
+      grid-column: 6 / span 6;
     }
   }
 

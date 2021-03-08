@@ -83,69 +83,39 @@ h2, .h2 {
 h1, .h1 {
   font-size: rem(28px);
 
-  @include respond-above(md) {
+  @media (min-width: 1200px) and (min-height: 720px) {
     font-size: rem(32px);
-  }
-
-  @include respond-above(xl) {
-    font-size: rem(38px);
   }
 }
 
 h2, .h2 {
   font-size: rem(24px);
 
-  @include respond-above(md) {
+  @media (min-width: 1200px) and (min-height: 720px) {
     font-size: rem(26px);
   }
-
-  @include respond-above(xl) {
-    font-size: rem(30px);
-  }
 }
-
-// .title {
-//   + * {
-//     margin-top: rem(24px);
-
-//     @include respond-above(md) {
-//       margin-top: rem(30px);
-//     }
-//   }
-
-//   .title + & {
-//     margin-top: rem(8px);
-
-//     @include respond-above(md) {
-//       margin-top: rem(12px);
-//     }
-//   }
-// }
 
 .title {
   margin-bottom: rem(24px);
 
-  @include respond-above(md) {
+  @media (min-width: 1200px) and (min-height: 720px) {
     margin-bottom: rem(30px);
   }
 }
 
 p {
+  font-size: $font-size-lg;
+
+  @media (min-width: 1200px) and (min-height: 720px) {
+    line-height: $line-height-lg;
+    font-size: $font-size-xl;
+  }
+
   &:last-child {
     margin-bottom: 0;
   }
 }
-
-// .text {
-//   .text + &,
-//   .media + & {
-//     margin-top: rem(20px);
-
-//     @include respond-above(md) {
-//       margin-top: rem(24px);
-//     }
-//   }
-// }
 
 // This code block is taken directly from Bootstrap 4.5.3's Grid component (_grid.scss).
 .container,
@@ -182,6 +152,7 @@ p {
 
 .grid {
   display: grid;
+  grid-template-columns: repeat(12, minmax(10px, 1fr));
 }
 
 .site-main {
@@ -191,7 +162,7 @@ p {
   padding-top: rem(20px);
   padding-bottom: rem(20px);
 
-  @include respond-above(sm) {
+  @media (min-width: 568px) and (min-height: 480px) {
     min-height: calc(100vh - (#{rem(62px)} + #{rem(8px)}));
     margin-bottom: rem(62px) + rem(8px);
   }
