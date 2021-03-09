@@ -10,7 +10,7 @@
         </div>
 
         <div class="about-strings-wrapper">
-          <div class="about-strings about-strings--typed"></div>
+          <div class="about-strings about-strings--typed" aria-hidden="true"></div>
 
           <div class="about-strings about-strings--static sr-only">
             <span
@@ -20,24 +20,16 @@
             />
           </div>
         </div>
-
-        <div class="blob blob--1">
-          <img :src="require('~/assets/blobs/blob-1.svg')" alt="">
-        </div>
-
-        <div class="blob blob--2">
-          <img :src="require('~/assets/blobs/blob-2.svg')" alt="">
-        </div>
-
-        <div class="blob blob--3">
-          <img :src="require('~/assets/blobs/blob-3.svg')" alt="">
-        </div>
-
-        <div class="blob blob--4">
-          <img :src="require('~/assets/blobs/blob-4.svg')" alt="">
-        </div>
       </div>
     </section>
+
+    <div class="blob blob--left">
+      <img :src="require('~/assets/blobs/blob-1.svg')" alt="">
+    </div>
+
+    <div class="blob blob--right">
+      <img :src="require('~/assets/blobs/blob-2.svg')" alt="">
+    </div>
   </main>
 </template>
 
@@ -57,11 +49,11 @@ export default {
   },
 
   mounted() {
-    this.typeAboutStrings();
+    this.typeStrings();
   },
 
   methods: {
-    typeAboutStrings() {
+    typeStrings() {
       new TypeIt(".about-strings--typed", {
         speed: 75,
         deleteSpeed: 45,
@@ -203,7 +195,41 @@ export default {
   }
 
   .blob {
-    position: absolute;
+    position: fixed;
+    z-index: -1;
+    opacity: 0.333333;
+    width: rem(400px);
+
+    @media (min-width: 992px) and (min-height: 600px) {
+      width: rem(500px);
+    }
+
+    @media (min-width: 1200px) and (min-height: 720px) {
+      width: rem(640px);
+    }
+
+    &--left {
+      bottom: rem(-120px);
+      left: rem(-190px);
+
+      @media (min-width: 1200px) and (min-height: 720px) {
+        left: rem(-288px);
+      }
+    }
+
+    &--right {
+      top: rem(-120px);
+      right: rem(-180px);
+      display: none;
+
+      @media (min-width: 375px), (min-height: 400px) {
+        display: block;
+      }
+
+      @media (min-width: 1200px) and (min-height: 720px) {
+        top: rem(-144px);
+      }
+    }
   }
 }
 </style>

@@ -157,7 +157,6 @@ p {
 }
 
 .site-main {
-  position: relative;
   min-height: calc(100vh - #{rem(56px)});
   margin-bottom: rem(56px);
   padding-top: rem(20px);
