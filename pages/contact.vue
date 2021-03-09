@@ -17,27 +17,29 @@
 </template>
 
 <style lang="scss">
-.grid > * {
-  grid-column: 1 / span 12;
+#contact {
+  .grid > * {
+    grid-column: 1 / span 12;
 
-  @include respond-above(md) {
-    grid-column: 1 / span 10;
+    @include respond-above(md) {
+      grid-column: 1 / span 10;
+    }
+
+    @include respond-above(lg) {
+      grid-column: 1 / span 9;
+    }
   }
 
-  @include respond-above(lg) {
-    grid-column: 1 / span 9;
+  .title {
+    grid-row: 1;
   }
-}
 
-.title {
-  grid-row: 1;
-}
+  .text {
+    grid-row: 2;
+  }
 
-.text {
-  grid-row: 2;
-}
-
-.formulate-form {
-  grid-row: 3;
+  .formulate-form {
+    grid-row: 3;
+  }
 }
 </style>
