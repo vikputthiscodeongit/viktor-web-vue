@@ -18,6 +18,7 @@
     "lodash": "^4.17.21",
     "nuxt": "^2.15.2",
     "nuxt-i18n": "^6.20.4",
+    "rellax": "^1.12.1",
     "typeit": "^7.0.4"
   },
   "devDependencies": {
