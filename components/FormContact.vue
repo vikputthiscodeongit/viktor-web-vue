@@ -58,32 +58,62 @@ export default {
           type: "group",
           children: [
             {
+              label: this.generateMaths(),
+              name: "maths-answer",
+              type: "text",
+              inputmode: "numeric",
+              validation: "^required",
+              outerClass: [ "formulate-input--inline formulate-input--maths-answer" ]
+            },
+            {
               label: "Verstuur bericht",
               type: "submit"
             }
           ]
         }
-      ]
+      ],
+
+      maths: []
     };
   },
 
   mounted() {
+    this.generateMaths();
   },
 
   methods: {
+    generateRandInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
 
+      return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
+    generateMaths() {
+      const maths = [];
 
+      let i = 0;
 
+      while (i < 2) {
+        const digit = this.generateRandInt(0, 10);
 
+        maths.push(digit);
 
+        i++;
       }
 
+      const solution = maths[0] + maths[1];
 
+      maths.push(solution);
 
+      this.maths = maths;
+      console.log(this.maths);
 
+      return this.maths[0] + " + " + this.maths[1] + " =";
+    },
 
+    validateMaths() {
+      // Code
     }
   }
 };
@@ -128,16 +158,16 @@ export default {
       margin-top: 0;
     }
   }
+}
 
-  &-wrapper {
-    .formulate-input--ifl > & {
-      position: relative;
-    }
+.formulate-input-wrapper {
+  .formulate-input--ifl > & {
+    position: relative;
+  }
 
-    .formulate-input--inline > & {
-      display: flex;
-      align-items: center;
-    }
+  .formulate-input--inline > & {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -179,6 +209,14 @@ label {
 .formulate-input-element {
   // Input types that preferably should not be targeted, but are with this selector in its current form:
   // button, checkbox, color, file, hidden, image, radio, range, reset & submit.
+  .formulate-input--inline.formulate-input--maths-answer > .formulate-input-wrapper > & {
+    &::after {
+      content: "*";
+      vertical-align: top;
+      font-weight: $headings-font-weight;
+    }
+  }
+
   > input,
   > textarea {
     width: 100%;
