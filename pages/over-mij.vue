@@ -8,7 +8,7 @@
           </div>
         </div>
 
-        <div class="texts rellax" data-rellax-speed="4">
+        <div class="texts rellax" data-rellax-speed="2" data-rellax-tablet-speed="4">
           <div class="title">
             <h1>Lorem ipsum dolor sit amet</h1>
           </div>
@@ -62,6 +62,12 @@ export default {
 @import "~/assets/scss/utilities/aspect-ratio";
 
 #about {
+  .grid {
+    @include respond-below(md) {
+      grid-row-gap: rem(40px);
+    }
+  }
+
   .media,
   .texts {
     @include respond-above(md) {
@@ -78,10 +84,6 @@ export default {
 
     @include respond-above(sm) {
       grid-column: 3 / span 8;
-    }
-
-    @include respond-below(md) {
-      margin-bottom: rem(40px);
     }
 
     @include respond-above(md) {

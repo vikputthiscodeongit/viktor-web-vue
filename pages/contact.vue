@@ -22,11 +22,7 @@
     grid-column: 1 / span 12;
 
     @include respond-above(md) {
-      grid-column: 1 / span 10;
-    }
-
-    @include respond-above(lg) {
-      grid-column: 1 / span 9;
+      grid-column: 2 / span 10;
     }
   }
 

@@ -170,5 +170,10 @@ p {
     min-height: calc(100vh - (#{rem(62px)} + #{rem(8px)}));
     margin-bottom: rem(62px) + rem(8px);
   }
+
+  @media (min-height: 600px) {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
 }
 </style>
