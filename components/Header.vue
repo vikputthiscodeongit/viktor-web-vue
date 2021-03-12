@@ -3,33 +3,8 @@
     <div class="site-menu">
       <nav class="site-navigation">
         <ul class="site-navigation__buttons" aria-label="Pagina's">
-          <!-- <li
-            v-for="navItem in navItems"
-            :key="navItem.id"
-            class="site-navigation__button"
-          >
-            <NuxtLink
-              :to="navItem.itemLink"
-              class="site-navigation__link"
-            >
-              <span
-                v-if="navItem.iconUrl !== null"
-                class="site-navigation__icon"
-              >
-                <img
-                  :src="navItem.iconUrl"
-                  alt=""
-                >
-              </span>
-
-              <span class="site-navigation__title">
-                <span v-text="navItem.itemLabel" />
-              </span>
-            </NuxtLink>
-          </li> -->
-
           <li
-            v-for="navItem in navItems2"
+            v-for="navItem in navItems"
             :key="navItem.id"
             class="site-navigation__button"
           >
@@ -59,16 +34,12 @@
 </template>
 
 <script>
-import isEmpty from "lodash/isEmpty";
-
 export default {
   name: "Header",
 
   data() {
     return {
-      navItems: [],
-
-      navItems2: [
+      navItems: [
         {
           iconUrl: require("~/assets/icons/teenyicons-home-alt.svg"),
           itemLabel: "Home",
@@ -91,85 +62,6 @@ export default {
         },
       ]
     };
-  },
-
-  created() {
-    // this.makeNav();
-  },
-
-  methods: {
-    makeNav() {
-      const endpoint = "/api/singletons/get/site_menu?token=7c4ceaf1719a244f87bd8710de20cb";
-
-      this.getMenuData(endpoint);
-    },
-
-    async getMenuData(endpoint) {
-      try {
-        const response = await this.$axios.$get(endpoint);
-
-        const menuItems = response.items;
-
-        menuItems.forEach((menuItem, i) => {
-          const menuItemIndex = i;
-
-          this.getSingletonData(menuItem, menuItemIndex);
-        });
-      } catch(error) {
-        console.log(error);
-      }
-    },
-
-    async getSingletonData(menuItem, menuItemIndex) {
-      try {
-        const menuItemLabel = menuItem.value.label;
-        const singletonName = menuItem.value.singleton_name;
-
-        const endpoint = `/api/singletons/get/${singletonName}?token=7c4ceaf1719a244f87bd8710de20cb`;
-
-        const response = await this.$axios.get(endpoint);
-
-        let singletonAttrs = response.data.attributes;
-
-        // if (this.$i18n.locale !== this.$i18n.defaultLocale) {
-        //   singletonAttrs = `response.data.attributes_${this.$i18n.locale}`;
-        // }
-
-        this.makeNavItem(singletonAttrs, menuItemIndex, menuItemLabel);
-      } catch(error) {
-        console.log(error);
-      }
-    },
-
-    makeNavItem(singletonAttrs, menuItemIndex, menuItemLabel) {
-      try {
-        const iconUrl = isEmpty(singletonAttrs.icon.path)
-          ? null
-          : `${this.$axios.defaults.baseURL}/${singletonAttrs.icon.path}`;
-
-        const itemLabel = isEmpty(menuItemLabel)
-          ? singletonAttrs.title
-          : menuItemLabel;
-
-        let itemLink = isEmpty(singletonAttrs.slug)
-          ? null
-          : `/${singletonAttrs.slug}`;
-
-        if (itemLink === "/home") {
-          itemLink = "/";
-        }
-
-        const item = {
-          iconUrl,
-          itemLabel,
-          itemLink
-        };
-
-        this.navItems.splice(menuItemIndex, 0, item);
-      } catch(error) {
-        console.log(error);
-      }
-    }
   }
 };
 </script>
@@ -235,7 +127,7 @@ export default {
     display: inline-flex;
     flex-wrap: wrap;
     align-content: center;
-    align-items: center; // Not setting align-items causes erroneous alignment in IE11.
+    align-items: center;
     width: 100%;
     height: 100%;
     padding-top: rem(2px);

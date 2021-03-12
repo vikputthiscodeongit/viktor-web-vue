@@ -1,8 +1,4 @@
 <template>
-  <!-- <FormulateForm
-    :schema="formGroups"
-  /> -->
-
   <FormulateForm
     :schema="formSchema"
   />
@@ -14,8 +10,6 @@ export default {
 
   data() {
     return {
-      formGroups: [],
-
       formSchema: [
         {
           type: "group",
@@ -74,106 +68,22 @@ export default {
   },
 
   mounted() {
-    // this.makeForm();
   },
 
   methods: {
-    makeForm() {
-      const endpoint = "/api/singletons/get/form_contact?token=7c4ceaf1719a244f87bd8710de20cb";
 
-      this.processFormData(endpoint);
     },
 
-    async processFormData(endpoint) {
-      try {
-        const response = await this.$axios.$get(endpoint);
 
-        const groupsObj = response.groups;
-        const groupsArr = groupsObj.group;
 
-        groupsArr.forEach((groupObj, i) => {
-          const groupIndex = i;
-          let lastGroup = false;
 
-          if (groupIndex + 1 === groupsArr.length) {
-            lastGroup = true;
-          }
 
-          const groupArr = groupObj.value;
-
-          groupArr.forEach((fieldObj, i) => {
-            const fieldIndex = i;
-            let lastEntry = false;
-
-            if (lastGroup && fieldIndex + 1 === groupArr.length) {
-              lastEntry = true;
-            }
-
-            this.generateFormFieldData(fieldObj, groupIndex, fieldIndex, lastEntry);
-          });
-        });
-      } catch(error) {
-        console.log(error);
-      }
-    },
-
-    generateFormFieldData(fieldObj, groupIndex, fieldIndex, lastEntry) {
-      if (fieldIndex === 0) {
-        this.$set(this.formGroups, groupIndex, {
-          type: "group",
-          children: []
-        });
       }
 
-      const label = fieldObj.value.label;
-      const input = fieldObj.value.input;
 
-      const field = {
-        outerClass: [ `formulate-input--${label.type}` ],
-        label: label.text,
-        type: input.type,
-        name: input.name,
-        placeholder: input.placeholder,
-        validation: "optional|"
-      };
 
-      if (input.type === "textarea") {
-        field.rows = 8;
-      }
 
-      if (input.required) {
-        field.label += " *";
 
-        field.validation = "^required|";
-
-        if (input.type === "email") {
-          field.validation += "email|";
-        }
-      }
-
-      if (input.minlength !== null) {
-        field.validation += `min:${input.minlength}|`;
-      }
-
-      if (input.maxlength !== null) {
-        field.validation += `max:${input.maxlength}|`;
-      }
-
-      field.validation = field.validation.slice(0, -1); // Remove the last |.
-
-      this.$set(this.formGroups[groupIndex].children, fieldIndex, field);
-
-      if (lastEntry) {
-        this.$set(this.formGroups, [groupIndex + 1], {
-          type: "group",
-          children: [
-            {
-              label: "Send message",
-              type: "submit"
-            }
-          ]
-        });
-      }
     }
   }
 };
@@ -267,7 +177,8 @@ label {
 }
 
 .formulate-input-element {
-  // Input types that preferably should not be targeted, but are with the current selector: button, checkbox, color, file, hidden, image, radio, range, reset & submit.
+  // Input types that preferably should not be targeted, but are with this selector in its current form:
+  // button, checkbox, color, file, hidden, image, radio, range, reset & submit.
   > input,
   > textarea {
     width: 100%;
@@ -327,7 +238,7 @@ label {
 
     //
     // Reset default :invalid styles.
-    // General (IE, maybe more)
+    // General (IE, maybe others)
     &:invalid {
       outline: none;
     }

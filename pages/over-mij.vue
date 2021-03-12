@@ -41,18 +41,6 @@ export default {
   methods: {
     parallax() {
       new Rellax();
-
-      // How it should be:
-
-      // if vw > md breakpoint
-        // const rellax = new Rellax();
-
-      // on resize
-        // if vw > md breakpoint && !rellax
-          // const rellax = new Rellax();
-
-        // if vw < md breakpoint && rellax
-          // rellax.destroy()
     }
   }
 };

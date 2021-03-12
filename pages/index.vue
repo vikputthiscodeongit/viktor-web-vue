@@ -48,7 +48,7 @@ export default {
     typeStrings() {
       new TypeIt(".about-strings--typed", {
         speed: 75,
-        deleteSpeed: 45,
+        deleteSpeed: 40,
         loop: true
       })
         // 1
