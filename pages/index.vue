@@ -22,14 +22,6 @@
         </div>
       </div>
     </section>
-
-    <div class="blob blob--left">
-      <img :src="require('~/assets/blobs/blob-1.svg')" alt="">
-    </div>
-
-    <div class="blob blob--right">
-      <img :src="require('~/assets/blobs/blob-2.svg')" alt="">
-    </div>
   </main>
 </template>
 

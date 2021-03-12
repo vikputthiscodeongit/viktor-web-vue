@@ -3,6 +3,10 @@
     <Header />
 
     <Nuxt />
+
+    <BlobsBlobLeft />
+
+    <BlobsBlobRight />
   </div>
 </template>
 
