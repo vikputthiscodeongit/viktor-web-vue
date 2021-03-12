@@ -1,7 +1,7 @@
 <template>
   <main class="site-main" id="home">
     <section class="site-section">
-      <div class="container-fluid grid">
+      <div class="container grid">
         <div class="home-title">
           <h1>
             <span>Viktor </span>
@@ -89,6 +89,11 @@ export default {
     padding-bottom: 10vh;
   }
 
+  @media (min-height: 1050px) {
+    padding-top: 17.5vh;
+    padding-bottom: 17.5vh;
+  }
+
   .grid {
     grid-row-gap: rem(18px);
 
@@ -107,12 +112,28 @@ export default {
       @include respond-above(sm) {
         min-height: calc(100vh - #{rem(62px)} - #{rem(8px)} - (2 * 10vh));
       }
+
+      @include respond-above(md) {
+        grid-template-rows: unset;
+        grid-row-gap: rem(48px);
+        min-height: unset;
+      }
     }
 
-    @media (min-width: 768px) and (min-height: 600px) {
-      grid-template-rows: unset;
-      grid-row-gap: unset;
-      min-height: unset;
+    @media (min-height: 720px) and (min-width: 1200px) {
+      grid-row-gap-bottom: rem(56px);
+    }
+
+    @media (min-height: 1050px) {
+      min-height: calc(100vh - #{rem(56px)} - (2 * 17.5vh));
+
+      @include respond-above(sm) {
+        min-height: calc(100vh - #{rem(62px)} - #{rem(8px)} - (2 * 17.5vh));
+      }
+
+      @include respond-above(md) {
+        min-height: unset;
+      }
     }
   }
 
@@ -124,21 +145,12 @@ export default {
       grid-column: 2 / span 10;
     }
 
-    @include respond-above(md) {
-      grid-column: 3 / span 8;
-    }
-
     @media (min-height: 480px) {
       align-self: flex-end;
     }
 
     @media (min-width: 768px) and (min-height: 600px) {
       align-self: unset;
-      margin-bottom: rem(48px);
-    }
-
-    @media (min-width: 1200px) and (min-height: 720px) {
-      margin-bottom: rem(56px);
     }
 
     h1 {
@@ -170,10 +182,6 @@ export default {
 
       @include respond-above(xs) {
         grid-column: 3 / span 8;
-      }
-
-      @include respond-above(md) {
-        grid-column: 4 / span 6;
       }
 
       @media (min-width: 768px) and (min-height: 600px) {
