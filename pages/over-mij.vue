@@ -107,10 +107,6 @@ export default {
       grid-column: 6 / span 6;
       margin-top: rem(250px)
     }
-
-    @include respond-above(xxl) {
-      margin-top: rem(300px);
-    }
   }
 }
 </style>
