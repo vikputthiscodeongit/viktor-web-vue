@@ -1,6 +1,7 @@
 <template>
   <FormulateForm
     :schema="formSchema"
+    @submit="submitForm"
   />
 </template>
 
@@ -58,12 +59,12 @@ export default {
           type: "group",
           children: [
             {
-              label: this.generateMaths(),
-              name: "maths-answer",
+              label: this.addition,
+              name: "captchaanswer",
               type: "text",
               inputmode: "numeric",
               validation: "^required",
-              outerClass: [ "formulate-input--inline formulate-input--maths-answer" ]
+              outerClass: [ "formulate-input--inline formulate-input--captchaanswer" ]
             },
             {
               label: "Verstuur bericht",
@@ -77,10 +78,6 @@ export default {
     };
   },
 
-  mounted() {
-    this.generateMaths();
-  },
-
   methods: {
     generateRandInt(min, max) {
       min = Math.ceil(min);
@@ -89,31 +86,49 @@ export default {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
-    generateMaths() {
+    generateAddition() {
       const maths = [];
 
-      let i = 0;
-
-      while (i < 2) {
+      for (let i = 0; i < 2; i++) {
         const digit = this.generateRandInt(0, 10);
-
         maths.push(digit);
-
-        i++;
       }
 
       const solution = maths[0] + maths[1];
-
       maths.push(solution);
 
       this.maths = maths;
       console.log(this.maths);
-
-      return this.maths[0] + " + " + this.maths[1] + " =";
     },
 
-    validateMaths() {
-      // Code
+    validateAddition(answer) {
+      console.log(answer);
+      console.log(typeof answer);
+
+      const solution = this.maths[2];
+      console.log(solution);
+      console.log(typeof solution);
+
+      return answer === solution;
+    },
+
+    submitForm(data) {
+      console.log("Form submit triggered.");
+
+      const captchaAnswer = data.group_7[0].captchaanswer
+      console.log(captchaAnswer);
+      const mathsValid = this.validateAddition(captchaanswer);
+      console.log(mathsValid);
+
+      if (!mathsValid) {
+        this.generateAddition();
+      }
+    }
+  },
+
+  computed: {
+    addition() {
+      return `${this.maths[0]} + ${this.maths[1]} =`;
     }
   }
 };
@@ -209,7 +224,7 @@ label {
 .formulate-input-element {
   // Input types that preferably should not be targeted, but are with this selector in its current form:
   // button, checkbox, color, file, hidden, image, radio, range, reset & submit.
-  .formulate-input--inline.formulate-input--maths-answer > .formulate-input-wrapper > & {
+  .formulate-input--inline.formulate-input--captchaanswer > .formulate-input-wrapper > & {
     &::after {
       content: "*";
       vertical-align: top;
