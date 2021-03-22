@@ -1,8 +1,75 @@
 <template>
   <FormulateForm
-    :schema="formSchema"
     @submit="submitForm"
-  />
+    name="form-contact"
+  >
+    <FormulateInput
+      type="group"
+      name="group-user-data"
+    >
+      <FormulateInput
+        :outer-class="['formulate-input--ifl']"
+        type="text"
+        name="name"
+        label="Naam"
+        placeholder="Peter Beuk"
+        validation="optional"
+      />
+
+      <FormulateInput
+        :outer-class="['formulate-input--ifl']"
+        type="email"
+        name="email"
+        label="E-mailadres *"
+        placeholder="emailadres@voorbeeld.nl"
+        validation="^required|email|max:128"
+      />
+    </FormulateInput>
+
+    <FormulateInput
+      type="group"
+      name="group-message-data"
+    >
+      <FormulateInput
+        :outer-class="['formulate-input--ifl']"
+        type="text"
+        name="subject"
+        label="Onderwerp *"
+        placeholder="Ik wil het met je hebben over..."
+        validation="^required|max:128"
+      />
+
+      <FormulateInput
+        :outer-class="['formulate-input--ifl']"
+        type="textarea"
+        name="message"
+        label="Bericht *"
+        placeholder="Wat een mooie website dit is. Wow, echt leuk. Super tof. Bla bla, die bla bloep."
+        rows="8"
+        validation="^required|min:12"
+      />
+    </FormulateInput>
+
+    <FormulateInput
+      type="group"
+      name="group-submit-message"
+    >
+      <FormulateInput
+        :outer-class="['formulate-input--inline', 'formulate-input--captcha-answer']"
+        :label="this.captcha.addition"
+        :validation-rules="{ correct: ({ value }) => Number(value) === this.captcha.numbers[2] }"
+        type="text"
+        name="captcha-answer"
+        inputmode="numeric"
+        validation="^required|correct"
+      />
+
+      <FormulateInput
+        type="submit"
+        label="Verstuur bericht"
+      />
+    </FormulateInput>
+  </FormulateForm>
 </template>
 
 <script>
@@ -11,71 +78,15 @@ export default {
 
   data() {
     return {
-      formSchema: [
-        {
-          type: "group",
-          children: [
-            {
-              label: "Naam",
-              name: "name",
-              type: "text",
-              placeholder: "Peter Beuk",
-              validation: "optional",
-              outerClass: [ "formulate-input--ifl" ]
-            },
-            {
-              label: "E-mailadres *",
-              name: "email",
-              type: "email",
-              placeholder: "emailadres@voorbeeld.nl",
-              validation: "^required|email|max:128",
-              outerClass: [ "formulate-input--ifl" ]
-            }
-          ]
-        },
-        {
-          type: "group",
-          children: [
-            {
-              label: "Onderwerp *",
-              name: "subject",
-              type: "text",
-              placeholder: "Ik wil het met je hebben over...",
-              validation: "^required|max:128",
-              outerClass: [ "formulate-input--ifl" ]
-            },
-            {
-              label: "Bericht *",
-              name: "message",
-              type: "textarea",
-              placeholder: "Wat een mooie website dit is. Wow, echt leuk. Super tof. Bla bla, die bla bloep.",
-              rows: 8,
-              validation: "^required|min:16",
-              outerClass: [ "formulate-input--ifl" ]
-            }
-          ]
-        },
-        {
-          type: "group",
-          children: [
-            {
-              label: this.addition,
-              name: "captchaanswer",
-              type: "text",
-              inputmode: "numeric",
-              validation: "^required",
-              outerClass: [ "formulate-input--inline formulate-input--captchaanswer" ]
-            },
-            {
-              label: "Verstuur bericht",
-              type: "submit"
-            }
-          ]
-        }
-      ],
-
-      maths: []
+      captcha: {
+        "numbers": [],
+        "addition": "Loading maths..."
+      }
     };
+  },
+
+  mounted() {
+    this.generateAddition();
   },
 
   methods: {
@@ -87,48 +98,41 @@ export default {
     },
 
     generateAddition() {
-      const maths = [];
+      const numbers = [];
 
       for (let i = 0; i < 2; i++) {
         const digit = this.generateRandInt(0, 10);
-        maths.push(digit);
+        numbers.push(digit);
       }
 
-      const solution = maths[0] + maths[1];
-      maths.push(solution);
+      const solution = numbers[0] + numbers[1];
+      numbers.push(solution);
 
-      this.maths = maths;
-      console.log(this.maths);
-    },
+      this.captcha.numbers = numbers;
 
-    validateAddition(answer) {
-      console.log(answer);
-      console.log(typeof answer);
+      const addition = `${numbers[0]} + ${numbers[1]} =`;
 
-      const solution = this.maths[2];
-      console.log(solution);
-      console.log(typeof solution);
-
-      return answer === solution;
+      this.captcha.addition = addition;
     },
 
     submitForm(data) {
       console.log("Form submit triggered.");
 
-      const captchaAnswer = data.group_7[0].captchaanswer
-      console.log(captchaAnswer);
-      const mathsValid = this.validateAddition(captchaanswer);
-      console.log(mathsValid);
+      console.log(data);
 
-      if (!mathsValid) {
-        this.generateAddition();
-      }
-    }
-  },
+      // Compose email with form data
 
-  computed: {
-    addition() {
-      return `${this.maths[0]} + ${this.maths[1]} =`;
+      // Send email
+        // Succes
+          // this.$formulate.reset("form-contact");
+
+          // this.generateAddition();
+        // Fail
+          // Show error notice
+
+          // On third try
+            // Show mailgo (https://github.com/manzinello/mailgo),
+            // email is pre-composed with form data.
     }
   }
 };
@@ -224,7 +228,7 @@ label {
 .formulate-input-element {
   // Input types that preferably should not be targeted, but are with this selector in its current form:
   // button, checkbox, color, file, hidden, image, radio, range, reset & submit.
-  .formulate-input--inline.formulate-input--captchaanswer > .formulate-input-wrapper > & {
+  .formulate-input--inline.formulate-input--captcha-answer > .formulate-input-wrapper > & {
     &::after {
       content: "*";
       vertical-align: top;
