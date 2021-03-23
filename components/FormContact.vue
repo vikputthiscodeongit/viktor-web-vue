@@ -5,7 +5,7 @@
   >
     <FormulateInput
       type="group"
-      name="group-user-data"
+      name="groupUserData"
     >
       <FormulateInput
         :outer-class="['formulate-input--ifl']"
@@ -28,7 +28,7 @@
 
     <FormulateInput
       type="group"
-      name="group-message-data"
+      name="groupMessageData"
     >
       <FormulateInput
         :outer-class="['formulate-input--ifl']"
@@ -52,14 +52,14 @@
 
     <FormulateInput
       type="group"
-      name="group-submit-message"
+      name="groupSubmitMessage"
     >
       <FormulateInput
         :outer-class="['formulate-input--inline', 'formulate-input--captcha-answer']"
         :label="this.captcha.addition"
         :validation-rules="{ correct: ({ value }) => Number(value) === this.captcha.numbers[2] }"
         type="text"
-        name="captcha-answer"
+        name="captchaAnswer"
         inputmode="numeric"
         validation="^required|correct"
       />
