@@ -21,6 +21,8 @@
     "typeit": "^7.0.4"
   },
   "devDependencies": {
+    "@babel/runtime-corejs3": "^7.13.10",
+    "@nuxt/babel-preset-app": "^2.15.3",
     "@nuxtjs/style-resources": "^1.0.0",
     "fibers": "^5.0.0",
     "lodash": "^4.17.21",
