@@ -115,7 +115,7 @@ export default {
       this.captcha.addition = addition;
     },
 
-    submitForm(data) {
+    async submitForm(data) {
       console.log("Form submit triggered.");
 
       console.log(data);
@@ -133,6 +133,32 @@ export default {
           // On third try
             // Show mailgo (https://github.com/manzinello/mailgo),
             // email is pre-composed with form data.
+
+      try {
+        const userData = data.groupUserData[0];
+        const msgData = data.groupMessageData;
+
+        const userId = "name" in userData ? userData.name : userData.email;
+
+        const mailSubject = `Je hebt een bericht van ${userId} ontvangen`;
+        const mailMessage =
+          `${userData.email} heeft op [DATUM] het volgende bericht achter gelaten:
+
+          ${msgData.message}`;
+
+        const mail = {
+          from: "mail@viktorchin.nl",
+          subject: mailSubject,
+          message: mailMessage,
+          to: "mail@viktorchin.nl"
+        };
+
+        await this.$mail.send(mail);
+
+        console.log("Mail sent!");
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
 };
