@@ -146,15 +146,6 @@ export default {
 
           ${msgData.message}`;
 
-        const mail = {
-          from: "mail@viktorchin.nl",
-          subject: mailSubject,
-          message: mailMessage,
-          to: "mail@viktorchin.nl"
-        };
-
-        await this.$mail.send(mail);
-
         console.log("Mail sent!");
       } catch(error) {
         console.log(error);
