@@ -71,8 +71,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // https://go.nuxtjs.dev/pwa
-    "@nuxtjs/pwa",
-    "nuxt-mail"
+    "@nuxtjs/pwa"
     // "nuxt-i18n"
   ],
 
@@ -85,13 +84,6 @@ export default {
     icon: {
       sizes: [ 192, 512 ]
     }
-  },
-
-  mail: {
-    smtp: {
-      host: "mail.zxcs.nl",
-      secure: true
-    },
   },
 
   // i18n: {
