@@ -116,39 +116,50 @@ export default {
     },
 
     async submitForm(data) {
+
+
+
+    async submitForm(data) {
       console.log("Form submit triggered.");
 
-      console.log(data);
-
-      // Compose email with form data
-
-      // Send email
-        // Succes
-          // this.$formulate.reset("form-contact");
-
-          // this.generateAddition();
-        // Fail
-          // Show error notice
-
-          // On third try
-            // Show mailgo (https://github.com/manzinello/mailgo),
-            // email is pre-composed with form data.
-
       try {
-        const userData = data.groupUserData[0];
-        const msgData = data.groupMessageData;
+        const userData  = data.groupUserData[0];
+        const userName  = userData.name;
+        const userEmail = userData.email;
+        const userId    = userName ? userName : userEmail;
 
-        const userId = "name" in userData ? userData.name : userData.email;
+        const msgData    = data.groupMessageData[0];
+        const msgSubject = msgData.subject;
+        const msgBody    = msgData.message;
 
-        const mailSubject = `Je hebt een bericht van ${userId} ontvangen`;
-        const mailMessage =
-          `${userData.email} heeft op [DATUM] het volgende bericht achter gelaten:
-
-          ${msgData.message}`;
+        await this.$axios({
+          method: "post",
+          baseURL: false,
+          url: "https://api.emailjs.com/api/v1.0/email/send",
+          data: {
+            service_id: "vimexx",
+            template_id: "website_contact",
+            user_id: "user_zLHSmpkotsCNru3JcOFF4",
+            template_params: {
+              userName,
+              userEmail,
+              userId,
+              msgSubject,
+              msgBody
+            },
+            accessToken: "b081b128d8bf66c51d038eff9bcbfe75"
+          }
+        });
 
         console.log("Mail sent!");
       } catch(error) {
         console.log(error);
+
+        // Show error notice
+
+        // On third try
+            // Show mailgo (https://github.com/manzinello/mailgo),
+            // email is pre-composed with form data.
       }
     }
   }
