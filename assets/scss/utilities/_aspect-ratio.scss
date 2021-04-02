@@ -4,6 +4,6 @@
   // }
 
   &--square {
-    @include aspect-ratio(1, 1);
+    @include aspect-ratio(1, 1, true);
   }
 }

@@ -1,4 +1,4 @@
-@mixin aspect-ratio($width, $height, $grid: true, $image-size: cover) {
+@mixin aspect-ratio($width, $height, $grid: false, $image-size: cover) {
   @if $width == "" or $height == "" {
     @if $width == "" {
       @warn "Aspect ratio: not set. Defaulting to '3 / 2'.";
