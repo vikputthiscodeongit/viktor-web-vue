@@ -115,9 +115,13 @@ export default {
       this.captcha.addition = addition;
     },
 
-    async submitForm(data) {
+    resetForm() {
+      this.$formulate.reset("form-contact");
 
+      this.$formulate.resetValidation("form-contact");
 
+      this.generateAddition();
+    },
 
     async submitForm(data) {
       console.log("Form submit triggered.");
@@ -152,6 +156,8 @@ export default {
         });
 
         console.log("Mail sent!");
+
+        this.resetForm();
       } catch(error) {
         console.log(error);
 
