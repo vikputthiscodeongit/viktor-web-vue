@@ -141,9 +141,9 @@ export default {
           baseURL: false,
           url: "https://api.emailjs.com/api/v1.0/email/send",
           data: {
-            service_id: "vimexx",
-            template_id: "website_contact",
-            user_id: "user_zLHSmpkotsCNru3JcOFF4",
+            service_id: this.$config.emailJsServiceId,
+            template_id: this.$config.emailJsTemplateId,
+            user_id: this.$config.emailJsUserId,
             template_params: {
               userName,
               userEmail,
@@ -151,7 +151,7 @@ export default {
               msgSubject,
               msgBody
             },
-            accessToken: "b081b128d8bf66c51d038eff9bcbfe75"
+            accessToken: this.$config,emailJsApiToken
           }
         });
 

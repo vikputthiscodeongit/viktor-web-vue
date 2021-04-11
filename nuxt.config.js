@@ -2,6 +2,13 @@ export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: "static",
 
+  privateRuntimeConfig: {
+    emailJsServiceId: process.env.EMAILJS_SERVICE_ID,
+    emailJsTemplateId: process.env.EMAILJS_TEMPLATE_ID,
+    emailJsUserId: process.env.EMAILJS_USER_ID,
+    emailJsApiToken: process.env.EMAILJS_API_TOKEN
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: "Viktor Chin",
