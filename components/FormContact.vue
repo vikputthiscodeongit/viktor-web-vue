@@ -123,7 +123,7 @@ export default {
       this.generateAddition();
     },
 
-    async submitForm(data) {
+    async submitForm(data, { $config: { emailJsServiceId, emailJsTemplateId, emailJsUserId, emailJsApiToken }}) {
       console.log("Form submit triggered.");
 
       try {
@@ -141,9 +141,9 @@ export default {
           baseURL: false,
           url: "https://api.emailjs.com/api/v1.0/email/send",
           data: {
-            service_id: this.$config.emailJsServiceId,
-            template_id: this.$config.emailJsTemplateId,
-            user_id: this.$config.emailJsUserId,
+            service_id: emailJsServiceId,
+            template_id: emailJsTemplateId,
+            user_id: emailJsUserId,
             template_params: {
               userName,
               userEmail,
@@ -151,7 +151,7 @@ export default {
               msgSubject,
               msgBody
             },
-            accessToken: this.$config,emailJsApiToken
+            accessToken: emailJsApiToken
           }
         });
 
